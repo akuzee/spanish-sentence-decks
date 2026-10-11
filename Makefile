@@ -43,7 +43,7 @@ $(DATA)/gapfill_pick.txt: $(DATA)/easy_pick.txt
 
 decks: $(DATA)/scored.tsv $(DATA)/curation.tsv $(DATA)/easy_pick.txt $(DATA)/gapfill_pick.txt
 	mkdir -p $(DECKS)
-	# AnkiWeb uploads (<150 MB each): main = curated pre-C1 vocabulary, challenge = C1+, every recording at original quality
+	# AnkiWeb uploads (limit 250 MB): main = curated pre-C1 vocabulary, challenge = C1+, every recording at original quality
 	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 exclude --keep-list ../$(DATA)/easy_pick.txt --only-list ../$(DATA)/gapfill_pick.txt --name "Ultimate top 20000 spanish sentences - best decks merged, customizable to your level" --out "../$(DECKS)/Ultimate top 20000 spanish sentences - best decks merged, customizable to your level.apkg"   --report ../$(DATA)/report_levels_1-8.tsv
 	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 only --name "Ultimate top 20000 spanish sentences - best decks merged, customizable to your level (extra 4,701 challenge sentences)" --out "../$(DECKS)/Ultimate top 20000 spanish sentences - best decks merged, customizable to your level (extra 4,701 challenge sentences).apkg" --report ../$(DATA)/report_levels_9-10.tsv
 	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)"     --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
