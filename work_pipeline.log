@@ -1,0 +1,53 @@
+cd pipeline && /private/tmp/claude-501/-Users-adamkuzee-Library-Application-Support-Claude-scratch-workspaces-034e00c4-64de-49f4-8ec9-3c468f760f37-1c6163fe-2b5d-41db-b78f-8d177dd700ed-scratch-2026-10-10-a1e12e/adbbc0fc-a3ff-4f77-9bca-0a0bb1af61c4/scratchpad/venv/bin/python score.py --pool ../data/pool.tsv --rankmap ../data/rankmap.json --out ../data/scored.tsv --levels ../data/levels.json
+  ... 0 (1s)
+  ... 10000 (5s)
+  ... 20000 (11s)
+  ... 30000 (14s)
+  ... 40000 (17s)
+  ... 50000 (20s)
+  ... 60000 (24s)
+  ... 70000 (29s)
+scored 78016 sentences in 34s; level cuts [515, 657, 816, 1002, 1235, 1533, 1994, 2688, 4002]
+unknown-word sentences: 5719 | vosotros: 282 | spain vocab: 606
+mkdir -p decks
+cd pipeline && /private/tmp/claude-501/-Users-adamkuzee-Library-Application-Support-Claude-scratch-workspaces-034e00c4-64de-49f4-8ec9-3c468f760f37-1c6163fe-2b5d-41db-b78f-8d177dd700ed-scratch-2026-10-10-a1e12e/adbbc0fc-a3ff-4f77-9bca-0a0bb1af61c4/scratchpad/venv/bin/python build_sentences.py --scored ../data/scored.tsv --levels ../data/levels.json --rankmap ../data/rankmap.json --sources-json ../sources.json --work ../work --variant macro   --name "Spanish Sentences – Macro (everything, by difficulty)" --out ../decks/Spanish_Sentences_Macro.apkg --report ../data/report_macro.tsv
+variant=macro sources=all level=none: 0 core, 78016 flat, 0 reviews, dropped 0
+wrote ../decks/Spanish_Sentences_Macro.apkg (253.4 MB): 78016 notes, 156032 cards, 17262 with audio
+tags: {'audio::no': 60754, 'audio::yes': 17262, 'drop::16_words': 74, 'drop::4_words': 23115, 'drop::artifact_chars': 6, 'drop::long_numbers': 54, 'drop::no_identical_english': 3, 'drop::no_terminal_punctuation': 10, 'gram::cond': 1466, 'gram::fut': 4233, 'gram::ger': 2458, 'gram::imper': 1468, 'gram::past': 12629, 'gram::perf': 2842, 'gram::subj': 5594, 'quality::low': 23262, 'region::spain': 606, 'region::vosotros': 282, 'spanish_sentences': 78016, 'src::neri1': 1479, 'src::neri2': 2416, 'src::neri3': 57336, 'src::tatoeba_native': 9262, 'src::tatoeba_tts': 7523, 'tier::flat': 78016}
+cd pipeline && /private/tmp/claude-501/-Users-adamkuzee-Library-Application-Support-Claude-scratch-workspaces-034e00c4-64de-49f4-8ec9-3c468f760f37-1c6163fe-2b5d-41db-b78f-8d177dd700ed-scratch-2026-10-10-a1e12e/adbbc0fc-a3ff-4f77-9bca-0a0bb1af61c4/scratchpad/venv/bin/python build_sentences.py --scored ../data/scored.tsv --levels ../data/levels.json --rankmap ../data/rankmap.json --sources-json ../sources.json --work ../work --variant quality --name "Spanish Sentences – Quality cut"                      --out ../decks/Spanish_Sentences_Quality.apkg --report ../data/report_quality.tsv
+variant=quality sources=all level=none: 0 core, 54754 flat, 0 reviews, dropped 0
+wrote ../decks/Spanish_Sentences_Quality.apkg (210.7 MB): 54754 notes, 109508 cards, 13556 with audio
+tags: {'audio::no': 41198, 'audio::yes': 13556, 'gram::cond': 1248, 'gram::fut': 3175, 'gram::ger': 1900, 'gram::imper': 975, 'gram::past': 10241, 'gram::perf': 2622, 'gram::subj': 4932, 'region::spain': 470, 'region::vosotros': 190, 'spanish_sentences': 54754, 'src::neri1': 482, 'src::neri2': 2416, 'src::neri3': 38300, 'src::tatoeba_native': 6192, 'src::tatoeba_tts': 7364, 'tier::flat': 54754}
+cd pipeline && /private/tmp/claude-501/-Users-adamkuzee-Library-Application-Support-Claude-scratch-workspaces-034e00c4-64de-49f4-8ec9-3c468f760f37-1c6163fe-2b5d-41db-b78f-8d177dd700ed-scratch-2026-10-10-a1e12e/adbbc0fc-a3ff-4f77-9bca-0a0bb1af61c4/scratchpad/venv/bin/python build_sentences.py --scored ../data/scored.tsv --levels ../data/levels.json --rankmap ../data/rankmap.json --sources-json ../sources.json --work ../work --variant latam   --name "Spanish Sentences – Latin American cut"               --out ../decks/Spanish_Sentences_LatAm.apkg --report ../data/report_latam.tsv
+variant=latam sources=all level=none: 0 core, 54097 flat, 0 reviews, dropped 0
+wrote ../decks/Spanish_Sentences_LatAm.apkg (204.8 MB): 54097 notes, 108194 cards, 13191 with audio
+tags: {'audio::no': 40906, 'audio::yes': 13191, 'gram::cond': 1226, 'gram::fut': 3144, 'gram::ger': 1886, 'gram::imper': 959, 'gram::past': 10121, 'gram::perf': 2587, 'gram::subj': 4844, 'spanish_sentences': 54097, 'src::neri1': 482, 'src::neri2': 2402, 'src::neri3': 38022, 'src::tatoeba_native': 6041, 'src::tatoeba_tts': 7150, 'tier::flat': 54097}
+cd pipeline && /private/tmp/claude-501/-Users-adamkuzee-Library-Application-Support-Claude-scratch-workspaces-034e00c4-64de-49f4-8ec9-3c468f760f37-1c6163fe-2b5d-41db-b78f-8d177dd700ed-scratch-2026-10-10-a1e12e/adbbc0fc-a3ff-4f77-9bca-0a0bb1af61c4/scratchpad/venv/bin/python build_sentences.py --scored ../data/scored.tsv --levels ../data/levels.json --rankmap ../data/rankmap.json --sources-json ../sources.json --work ../work --variant latam --sources tatoeba --name "Spanish Sentences – Tatoeba only (LatAm cut)" --out ../decks/Spanish_Sentences_Tatoeba_LatAm.apkg
+variant=latam sources=tatoeba level=none: 0 core, 13191 flat, 0 reviews, dropped 0
+wrote ../decks/Spanish_Sentences_Tatoeba_LatAm.apkg (199.7 MB): 13191 notes, 26382 cards, 13191 with audio
+tags: {'audio::yes': 13191, 'gram::cond': 505, 'gram::fut': 573, 'gram::ger': 574, 'gram::imper': 241, 'gram::past': 3814, 'gram::perf': 588, 'gram::subj': 1378, 'spanish_sentences': 13191, 'src::tatoeba_native': 6041, 'src::tatoeba_tts': 7150, 'tier::flat': 13191}
+cd pipeline && /private/tmp/claude-501/-Users-adamkuzee-Library-Application-Support-Claude-scratch-workspaces-034e00c4-64de-49f4-8ec9-3c468f760f37-1c6163fe-2b5d-41db-b78f-8d177dd700ed-scratch-2026-10-10-a1e12e/adbbc0fc-a3ff-4f77-9bca-0a0bb1af61c4/scratchpad/venv/bin/python build_sentences.py --scored ../data/scored.tsv --levels ../data/levels.json --rankmap ../data/rankmap.json --sources-json ../sources.json --work ../work --variant latam --level B1 --split-core 2 --name "Spanish Sentences – B1 LatAm (Core/Extended)" --out ../decks/Spanish_Sentences_B1_LatAm.apkg --report ../data/report_b1_latam.tsv
+variant=latam sources=all level=B1: 11397 core, 10075 extended, 1000 reviews, dropped 31625
+wrote ../decks/Spanish_Sentences_B1_LatAm.apkg (155.5 MB): 22472 notes, 44944 cards, 9606 with audio
+tags: {'audio::no': 12866, 'audio::yes': 9606, 'gram::cond': 768, 'gram::fut': 1231, 'gram::ger': 897, 'gram::imper': 444, 'gram::past': 5248, 'gram::perf': 1081, 'gram::subj': 2994, 'spanish_sentences': 22472, 'src::neri1': 6, 'src::neri2': 670, 'src::neri3': 12190, 'src::tatoeba_native': 4301, 'src::tatoeba_tts': 5305, 'tier::core': 11397, 'tier::extended': 10075, 'tier::review': 1000}
+cd pipeline && for f in ../decks/*.apkg; do echo "== $f"; /private/tmp/claude-501/-Users-adamkuzee-Library-Application-Support-Claude-scratch-workspaces-034e00c4-64de-49f4-8ec9-3c468f760f37-1c6163fe-2b5d-41db-b78f-8d177dd700ed-scratch-2026-10-10-a1e12e/adbbc0fc-a3ff-4f77-9bca-0a0bb1af61c4/scratchpad/venv/bin/python verify.py $f --tmp ../work/_verify; done
+== ../decks/Spanish_Sentences_B1_LatAm.apkg
+imported: new 22472, duplicate 0, conflicting 0, missing notetype 0
+decks: ['Spanish Sentences – B1 LatAm (Core/Extended)', 'Spanish Sentences – B1 LatAm (Core/Extended)::1 Core', 'Spanish Sentences – B1 LatAm (Core/Extended)::2 Extended']
+notes: 22472 cards: 44944
+  type 0 queue 0: 42944 cards, due 1-42944, ivl 0-0
+  type 2 queue 2: 2000 cards, due 460-640, ivl 60-240
+review cards whose due date != interval: 0 []
+media referenced: 9606 missing: 0
+first new cards: ['No te molestes en contestar esta carta.', 'No te molestes en contestar esta carta.', 'Para mañana, esta niña lo habrá hecho.', 'Para mañana, esta niña lo habrá hecho.', 'Envíe esta caja a esta dirección, por fa']
+integrity: ok
+== ../decks/Spanish_Sentences_LatAm.apkg
+imported: new 54097, duplicate 0, conflicting 0, missing notetype 0
+decks: ['Spanish Sentences – Latin American cut']
+notes: 54097 cards: 108194
+  type 0 queue 0: 108194 cards, due 1-108194, ivl 0-0
+review cards whose due date != interval: 0 []
+media referenced: 13191 missing: 0
+first new cards: ['Uno, dos, tres, cuatro.', 'Uno, dos, tres, cuatro.', 'Feliz Acción de Gracias.', 'Feliz Acción de Gracias.', 'Feliz Día de Gracias.']
+integrity: ok
+== ../decks/Spanish_Sentences_Macro.apkg

@@ -1,0 +1,9 @@
+work/
+data/*.tsv
+data/*.json
+decks/
+*.apkg
+_build_*/
+__pycache__/
+venv/
+sources.json

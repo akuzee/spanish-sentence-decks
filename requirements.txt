@@ -1,0 +1,4 @@
+spacy>=3.7
+simplemma>=1.0
+anki>=24.0        # only for verify.py
+# after installing: python -m spacy download es_core_news_md
