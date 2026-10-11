@@ -179,7 +179,8 @@ def main():
             f"Cards: <b>Read</b> (Spanish &rarr; English) and <b>Translate</b> (English &rarr; Spanish with optional hints). Audio on {naudio} sentences"
             + (f" (native recordings everywhere they exist; synthetic recordings up to level {a.tts_max_level}" + (f", re-encoded to {a.tts_bitrate} mono" if a.tts_bitrate else "") + ")" if a.audio == "all" and (a.tts_max_level < 10 or a.tts_bitrate) else "") + "; "
             "enable 'Don't play audio automatically' in the deck options if you only want it on demand. "
-            "Sentences: Tatoeba (CC BY 2.0 FR); native audio by Tatoeba user arh (CC BY-NC-ND 3.0). See the project README for full credits.")
+            "Sentences: Tatoeba (CC BY 2.0 FR); native audio by Tatoeba user arh (CC BY-NC-ND 3.0). See the project README for full credits.<br><br>"
+            "If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.")
     w.add_deck(DID_P, a.name, desc)
     if a.split_core: w.add_deck(DID_C, a.name + "::1 Core"); w.add_deck(DID_X, a.name + "::2 Extended")
     size = w.finish(a.out, MID, DID_C if a.split_core else DID_P)

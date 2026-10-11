@@ -96,6 +96,10 @@ cd pipeline && python build_sentences.py --scored ../data/scored.tsv --levels ..
 Pipeline steps: `pool.py` (read, clean, dedupe) → `score.py` (lemmatise, rank, grammar, regional flags) →
 `build_sentences.py` (variant, level preset, Core/Extended split, package) → `verify.py`.
 
+## Support
+
+If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.
+
 ## Credits
 
 - **Sentences**: the [Tatoeba Project](https://tatoeba.org) (CC BY 2.0 FR), via the AnkiWeb decks

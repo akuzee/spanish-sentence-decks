@@ -272,7 +272,8 @@ if _a.mode == "public":
             "B1 delete &le;1000, review 1001&ndash;2000 and strong cognates; B2 delete &le;2000, review 2001&ndash;3000.<br>"
             "Abbreviations: adj adjective, adv adverb, art article, conj conjunction, interj interjection, nc common noun, nf feminine noun, nf (el) feminine noun taking 'el', "
             "nm masculine noun, nm/f masc/fem noun, nmf noun with masc/fem meanings, num number, prep preposition, pron pronoun, v verb.<br>"
-            "Word list and glosses follow Mark Davies' <i>A Frequency Dictionary of Spanish</i>. Method and sources: github.com/akuzee/spanish-sentence-decks") % len(merged)
+            "Word list and glosses follow Mark Davies' <i>A Frequency Dictionary of Spanish</i>. Method and sources: github.com/akuzee/spanish-sentence-decks<br><br>"
+            "If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.") % len(merged)
     DECK_NAME = "Spanish Top 5000 Vocabulary (merged)"
 else:
     DECK_NAME = "Spanish Top 5000 (merged)"

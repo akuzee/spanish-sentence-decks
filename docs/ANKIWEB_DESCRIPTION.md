@@ -29,6 +29,9 @@ MAKE IT YOURS
 Level guide, method and other versions (everything-included, Latin American, B1 preset, with TTS audio):
 https://github.com/akuzee/spanish-sentence-decks
 
+SUPPORT
+If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.
+
 CREDITS
 Sentences: Tatoeba Project (CC BY 2.0 FR) via "9000 Spanish sentences – difficulty sorted with native audio"
 and "spanish 7500 intermediate/advanced sentences"; Neri's Spanish Sentences Parts 1–3. Audio: Tatoeba user arh
@@ -41,7 +44,7 @@ issue on GitHub.
 
 **Spanish Sentences – Macro (78k, everything)**: same as the main deck but nothing filtered out: every distinct
 line from the five source decks, including 2–3-word fragments, sorted by difficulty. Low-quality lines are tagged
-quality::low so you can cut them yourself. Link to GitHub for the rest.
+quality::low so you can cut them yourself. Link to GitHub for the rest, plus the SUPPORT and CREDITS blocks from the main deck.
 
 **Spanish Sentences – Latin American cut (54k)**: the main deck with the 657 Spain-specific sentences removed
 instead of tagged. Note the native audio is still a speaker from Spain.
@@ -71,6 +74,9 @@ MAKE IT YOURS
 • Part of speech tags: pos::nm, pos::nf, pos::v, pos::adj, …
 
 Guide and method: https://github.com/akuzee/spanish-sentence-decks (docs/LEVELS.md)
+
+SUPPORT
+If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.
 
 CREDITS
 Built from the AnkiWeb decks "Essential Spanish Vocabulary Top 5000" and "New Spanish Top 5000 with Examples";
