@@ -15,8 +15,8 @@ with two optional hints you can click when you are new to it).
 
 | deck | sentences | what it is | audio | where |
 |---|---|---|---|---|
-| **Ultimate top 43,803 spanish sentences - best decks merged** (levels 1–8, main) | 43,803 | Every sentence that passes the quality filter (4–16 words, complete, no artifacts), easiest 80%. Spain-specific sentences are tagged, not removed, and nudged a little later. | 8,303 (all original quality) | **AnkiWeb**, Releases (111 MB) |
-| **Ultimate top 43,803 spanish sentences - best decks merged (extra 10,951 challenge sentences)** (levels 9–10) | 10,951 | The hardest 20%: rare vocabulary, off-list words, stacked grammar. A separate deck; install it when level 8 feels easy. | 5,253 (all original quality) | **AnkiWeb**, Releases (81 MB) |
+| **Ultimate top 40000 spanish sentences - best decks merged** (levels 1–8, main) | 43,803 | Every sentence that passes the quality filter (4–16 words, complete, no artifacts), easiest 80%. Spain-specific sentences are tagged, not removed, and nudged a little later. | 8,303 (all original quality) | **AnkiWeb**, Releases (111 MB) |
+| **Ultimate top 40000 spanish sentences - best decks merged (extra 10,951 challenge sentences)** (levels 9–10) | 10,951 | The hardest 20%: rare vocabulary, off-list words, stacked grammar. A separate deck; install it when level 8 feels easy. | 5,253 (all original quality) | **AnkiWeb**, Releases (81 MB) |
 | Macro | 78,016 | Every distinct line from all five sources, including 2–3-word fragments and odd lines, nothing removed (low-quality lines are tagged `quality::low`) | 9,262 native | Releases (131 MB); AnkiWeb later |
 | One-file main deck | 54,754 | Levels 1–10 in one file, all audio | 13,556 | Releases (192 MB) |
 | Latin American cut | 54,097 | The main deck minus the 657 sentences with *vosotros* or Spain-only vocabulary | 13,191 | Releases (187 MB) |

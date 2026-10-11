@@ -35,8 +35,8 @@ BUILD = cd $(PIPE) && $(PY) build_sentences.py --scored ../$(DATA)/scored.tsv --
 decks: $(DATA)/scored.tsv
 	mkdir -p $(DECKS)
 	# AnkiWeb uploads (<150 MB each): the main deck is split in two so every recording stays at its original quality
-	$(BUILD) --variant quality --audio all --level-max 8 --name "Ultimate top 43,803 spanish sentences - best decks merged" --out "../$(DECKS)/Ultimate top 43,803 spanish sentences - best decks merged.apkg"   --report ../$(DATA)/report_levels_1-8.tsv
-	$(BUILD) --variant quality --audio all --level-min 9 --name "Ultimate top 43,803 spanish sentences - best decks merged (extra 10,951 challenge sentences)" --out "../$(DECKS)/Ultimate top 43,803 spanish sentences - best decks merged (extra 10,951 challenge sentences).apkg" --report ../$(DATA)/report_levels_9-10.tsv
+	$(BUILD) --variant quality --audio all --level-max 8 --name "Ultimate top 40000 spanish sentences - best decks merged" --out "../$(DECKS)/Ultimate top 40000 spanish sentences - best decks merged.apkg"   --report ../$(DATA)/report_levels_1-8.tsv
+	$(BUILD) --variant quality --audio all --level-min 9 --name "Ultimate top 40000 spanish sentences - best decks merged (extra 10,951 challenge sentences)" --out "../$(DECKS)/Ultimate top 40000 spanish sentences - best decks merged (extra 10,951 challenge sentences).apkg" --report ../$(DATA)/report_levels_9-10.tsv
 	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)"     --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
 	# GitHub Releases only (no size limit): one-file versions with all audio
 	$(BUILD) --variant quality --audio all --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg --report ../$(DATA)/report_quality.tsv
