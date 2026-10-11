@@ -90,7 +90,7 @@ select all and use *Notes → Delete*, *Cards → Toggle Suspend*, *Cards → Se
 
 Deleted something by mistake? Re-import the same .apkg: Anki adds back the missing notes and leaves the rest alone.
 
-## The vocabulary deck (Spanish Top 5000)
+## The vocabulary deck (Spanish 5000 Words – merged)
 
 The merged vocabulary deck uses the same idea with frequency bands instead of levels: tags `rank::0001-0500` …
 `rank::4501-5000`, plus `cognate::strong` / `cognate::weak` for words that look like their English translation,

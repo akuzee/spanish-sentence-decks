@@ -52,7 +52,7 @@ sections of one "Spanish Sentences" deck. Start here only if the main deck's lev
 
 (SUPPORT and CREDITS blocks as in the main deck.)
 
-# Secondary decks (shorter)
+# Secondary decks (shorter; Macro not uploaded yet)
 
 **Spanish Sentences – Macro (78k, everything)**: same as the main deck but nothing filtered out: every distinct
 line from the five source decks, including 2–3-word fragments, sorted by difficulty. Low-quality lines are tagged
@@ -63,7 +63,7 @@ quality::low so you can cut them yourself. Link to GitHub for the rest, plus the
 
 # Vocabulary deck
 
-Deck title: **Spanish Top 5000 Vocabulary – pictures, audio, example sentences (merged)**
+Deck title: **Spanish 5000 Most Common Words – Best Decks Merged (pictures, audio, example sentences)**
 
 The two best "Top 5000" Spanish vocabulary decks on AnkiWeb, merged into one: the pictures from *Essential
 Spanish Vocabulary Top 5000* and the example sentences and natural-sounding audio from *New Spanish Top 5000
