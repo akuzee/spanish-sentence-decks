@@ -1,45 +1,46 @@
-# Draft AnkiWeb descriptions
+# AnkiWeb description (main deck)
 
-AnkiWeb descriptions take plain text with limited HTML. One deck page per file. Replace https://github.com/akuzee/spanish-sentence-decks.
+Deck title: **Spanish Sentences – sorted by difficulty (54k sentences, native audio)**
 
-## Spanish Sentences – Tatoeba, Latin American cut, native audio
+---
 
-13,191 Spanish sentences with English translations, sorted from easy to hard by a single difficulty score, with
-Spain-specific sentences (vosotros forms, Spain-only vocabulary) removed. 6,041 of them have native-speaker audio.
+The best Spanish sentence decks on AnkiWeb, combined into one and sorted from easy to hard.
 
-WHAT YOU GET
-• Two cards per sentence: Read (Spanish → English) and Translate (English → the full Spanish sentence, with two
-  optional hints: the sentence with its key word blanked, and the key word).
-• The hardest word of each sentence is highlighted on the answer with its meaning and frequency rank.
-• Tags level::01 … level::10 (difficulty deciles), gram::subj/cond/perf/past/fut/imper/ger, audio::yes.
+54,754 sentences with English translations, pulled from five popular decks (the two Tatoeba decks, Neri's
+Spanish Sentences 1–3), de-duplicated, with fragments, broken lines and typos filtered out, and 6,000 native
+recordings. Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
+subjunctive or conditional), so the deck starts with "Es lo que es" and ends with the subjunctive and rare
+vocabulary.
 
-START AT YOUR LEVEL
-In the browser, search a band (e.g. tag:level::01 OR tag:level::02), then delete it or use Cards → Set Due Date
-→ "90-180!" to turn it into occasional reviews. Suggested: A2 delete 1–2 / review 3–4; B1 delete 1–4 /
-review 5–6; B2 delete 1–6 / review 7–8. Full guide: https://github.com/akuzee/spanish-sentence-decks/blob/main/docs/LEVELS.md
+TWO CARDS PER SENTENCE
+• Read: Spanish → English. The hardest word is highlighted with its meaning.
+• Translate: English → the full Spanish sentence. Two optional hints (the sentence with that word blanked, and
+  the word itself) for when a sentence is new to you.
 
-HOW IT IS SORTED
-Each word is lemmatised and looked up in a 5,000-word frequency list; the score is mainly the rank of the
-hardest word, plus a bump for grammar (subjunctive, conditional, perfect, past, future…). Method, code and other
-variants (quality cut, everything-included "macro", B1 preset): https://github.com/akuzee/spanish-sentence-decks
+MAKE IT YOURS
+• Start at your level: every card has a level::01–10 tag. Delete the levels below you, or turn them into
+  occasional reviews with Cards → Set Due Date → "90-180!". Presets for A2/B1/B2 are in the guide below.
+• Latin American Spanish: Spain-specific sentences (vosotros, Spain-only words) are tagged region::* – search
+  tag:region::* and suspend them.
+• Grammar drills: tag:gram::subj, gram::cond, gram::perf, gram::past, gram::fut, gram::imper, gram::ger.
+• Audio on demand: deck options → "Don't play audio automatically".
 
-AUDIO
-Native recordings (central Spain accent) on the 6,041 sentences that came from the 9000-sentence deck; the other
-7,150 have no audio in this release (their synthetic recordings were left out for licensing reasons; tag audio::no).
-To play on demand only: deck options → "Don't play audio automatically".
+Level guide, method and other versions (everything-included, Latin American, B1 preset, with TTS audio):
+https://github.com/akuzee/spanish-sentence-decks
 
 CREDITS
-Sentences from the Tatoeba Project (tatoeba.org), CC BY 2.0 FR. Audio recorded by Tatoeba user arh
-(tatoeba.org/en/user/profile/arh), CC BY-NC-ND 3.0, unmodified. Sentence selection via the AnkiWeb decks
-"9000 Spanish sentences – difficulty sorted with native audio" (ankiweb.net/shared/info/1713698257) and
-"spanish 7500 intermediate/advanced sentences"; thanks to both authors. Re-sorted and re-packaged by Adam Kuzee.
-Problems with a sentence? Open an issue at https://github.com/akuzee/spanish-sentence-decks.
+Sentences: Tatoeba Project (CC BY 2.0 FR) via "9000 Spanish sentences – difficulty sorted with native audio"
+and "spanish 7500 intermediate/advanced sentences"; Neri's Spanish Sentences Parts 1–3. Audio: Tatoeba user arh
+(CC BY-NC-ND 3.0). Thanks to all of them – this deck only re-sorts their work. Problems with a sentence? Open an
+issue on GitHub.
 
-## Spanish Sentences – Latin American cut (54,097) / Quality cut (54,754) / Macro (78,016)
+---
 
-(Only publish these if the subtitle material is cleared; see docs/SOURCES.md.)
+# Secondary decks (shorter)
 
-Same as above, plus ~41,000 colloquial lines from film and TV subtitles (Neri's Spanish Sentences, Parts 1–3),
-no audio on those. "Quality cut" keeps every complete 4–16-word sentence; "Latin American cut" also removes
-sentences with vosotros or Spain-only vocabulary; "Macro" removes nothing at all (fragments and odd lines are
-tagged quality::low) for people who want to do their own cutting.
+**Spanish Sentences – Macro (78k, everything)**: same as the main deck but nothing filtered out: every distinct
+line from the five source decks, including 2–3-word fragments, sorted by difficulty. Low-quality lines are tagged
+quality::low so you can cut them yourself. Link to GitHub for the rest.
+
+**Spanish Sentences – Latin American cut (54k)**: the main deck with the 657 Spain-specific sentences removed
+instead of tagged. Note the native audio is still a speaker from Spain.

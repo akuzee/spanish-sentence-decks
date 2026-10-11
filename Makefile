@@ -30,9 +30,12 @@ $(DATA)/scored.tsv: $(DATA)/pool.tsv $(DATA)/rankmap.json
 BUILD = cd $(PIPE) && $(PY) build_sentences.py --scored ../$(DATA)/scored.tsv --levels ../$(DATA)/levels.json --rankmap ../$(DATA)/rankmap.json --sources-json ../sources.json --work ../work
 decks: $(DATA)/scored.tsv
 	mkdir -p $(DECKS)
-	$(BUILD) --variant macro   --name "Spanish Sentences – Macro (everything, by difficulty)" --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
-	$(BUILD) --variant quality --name "Spanish Sentences – Quality cut"                      --out ../$(DECKS)/Spanish_Sentences_Quality.apkg --report ../$(DATA)/report_quality.tsv
-	$(BUILD) --variant latam   --name "Spanish Sentences – Latin American cut"               --out ../$(DECKS)/Spanish_Sentences_LatAm.apkg --report ../$(DATA)/report_latam.tsv
+	# AnkiWeb uploads (<150 MB): native recordings only
+	$(BUILD) --variant quality --audio native --name "Spanish Sentences – sorted by difficulty"            --out ../$(DECKS)/Spanish_Sentences.apkg --report ../$(DATA)/report_quality.tsv
+	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)" --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
+	$(BUILD) --variant latam   --audio native --name "Spanish Sentences – Latin American cut"               --out ../$(DECKS)/Spanish_Sentences_LatAm.apkg --report ../$(DATA)/report_latam.tsv
+	# full-audio builds (also include the 7500 deck's TTS recordings), for GitHub Releases
+	$(BUILD) --variant quality --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg
 	$(BUILD) --variant latam --sources tatoeba --name "Spanish Sentences – Tatoeba only (LatAm cut)" --out ../$(DECKS)/Spanish_Sentences_Tatoeba_LatAm.apkg
 	$(BUILD) --variant latam --sources tatoeba --audio native --name "Spanish Sentences – Tatoeba, Latin American cut, native audio" --out ../$(DECKS)/Spanish_Sentences_Tatoeba_LatAm_NativeAudio.apkg --report ../$(DATA)/report_tatoeba_latam.tsv
 	$(BUILD) --variant latam --level B1 --split-core 2 --name "Spanish Sentences – B1 LatAm (Core/Extended)" --out ../$(DECKS)/Spanish_Sentences_B1_LatAm.apkg --report ../$(DATA)/report_b1_latam.tsv

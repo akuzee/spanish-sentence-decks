@@ -27,17 +27,16 @@ The recordings here are unmodified.
 - **Tatoeba-only variants** (`--sources tatoeba`): text CC BY 2.0 FR, audio CC BY-NC-ND 3.0 → fine to share
   non-commercially with the credits above. The TTS recordings from the 7500 deck are the one grey spot; if in
   doubt, build with the native-audio deck only.
-- **Variants that include Neri's subtitle lines**: the subtitle text has no clear license and the deck author has
-  not stated one. We recommend *not* uploading those variants to AnkiWeb unless you have Neri's permission.
-  The pipeline lets anyone who downloaded Neri's decks build the full merge locally in a few minutes.
+- **Variants that include Neri's subtitle lines**: the subtitle text has no stated license. They are published
+  with credit on the understanding that the author can ask for removal at any time (see the decision below).
 - AnkiWeb removes copyrighted material on request and the uploader carries the responsibility, so when in doubt,
   leave it out.
 
 ### Decision for the first release (2026-10-11)
-Published on AnkiWeb: the **Tatoeba-only** decks (text CC BY 2.0 FR, native audio CC BY-NC-ND 3.0, both deck
-authors credited; the 9000-deck author explicitly allowed re-sharing). The variants that contain subtitle lines are
-**not** uploaded until Neri has answered the permission request in `NERI_PERMISSION_REQUEST.md`; anyone can
-build them locally with `make decks`. The merged vocabulary deck is not published.
+All variants are published with the credits above. The subtitle-based decks have been shared freely on AnkiWeb
+for over a decade and their author has not been reachable for years, so we publish with attribution and will
+take the material down immediately if the author or a rights holder asks. The merged vocabulary deck is not
+published.
 
 ## Frequency ranks (how difficulty is measured)
 

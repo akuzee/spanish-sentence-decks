@@ -71,6 +71,7 @@ def main():
     ap.add_argument("--review-cap", type=int, default=1000, help="max sentences kept as reviews from the band under --level")
     ap.add_argument("--split-core", type=int, default=0, help="N best sentences per target word go to '1 Core'; 0 = flat deck")
     ap.add_argument("--no-gloss", action="store_true", help="omit the dictionary gloss of the target word")
+    ap.add_argument("--vosotros-penalty", type=int, default=1000, help="how far vosotros sentences are pushed back in the order (score points; ~1000 = one level later, 3000 = to the end)")
     ap.add_argument("--audio", choices=["all", "native", "none"], default="all", help="which recordings to include: all, only the native (Tatoeba/arh) ones, or none")
     ap.add_argument("--name", required=True, help="deck name"); ap.add_argument("--out", required=True); ap.add_argument("--report")
     ap.add_argument("--seed", type=int, default=2026)
@@ -104,7 +105,7 @@ def main():
         core = a.split_core and k <= a.split_core and not r["vosotros"]
         r["tier"] = "core" if core else ("extended" if a.split_core else "flat")
         demote = 300 * max(0, k - a.split_core - 1) if (a.split_core and not core) else 0
-        r["order"] = r["score"] + demote + (3000 if r["vosotros"] else 0) + 250 * r["spain_w"] + (1500 if r["quality"] == 0 else 0)
+        r["order"] = r["score"] + demote + (a.vosotros_penalty if r["vosotros"] else 0) + 250 * r["spain_w"] + (1500 if r["quality"] == 0 else 0)
     for r in reviews: r["order"] = r["score"]
     core = sorted([r for r in studied if r["tier"] == "core"], key=lambda r: r["order"])
     rest = sorted([r for r in studied if r["tier"] != "core"], key=lambda r: r["order"])
@@ -147,7 +148,8 @@ def main():
             f"Variant: <b>{a.variant}</b>, sources: <b>{a.sources}</b>, level preset: <b>{a.level}</b>. "
             + (f"<b>1 Core</b> = best {a.split_core} sentences per target word ({len(core)}); <b>2 Extended</b> = the rest ({len(rest)}). " if a.split_core else "")
             + (f"{len(reviews)} sentences from the band just below the level start as long-interval reviews (tag tier::review). " if reviews else "")
-            + "Tags: level::01-10 (difficulty deciles), gram::*, src::*, audio::*, region::vosotros / region::spain"
+            + "Latin American learners: Spain-specific sentences are tagged region::vosotros / region::spain; search tag:region::* and suspend them. "
+            "Tags: level::01-10 (difficulty deciles), gram::*, src::*, audio::*"
             + (", quality::low + drop::* for lines that failed the quality filter" if a.variant == "macro" else "") + ". "
             f"Cards: <b>Read</b> (Spanish &rarr; English) and <b>Translate</b> (English &rarr; Spanish with optional hints). Audio on {naudio} sentences; "
             "enable 'Don't play audio automatically' in the deck options if you only want it on demand. "
