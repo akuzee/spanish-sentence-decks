@@ -60,7 +60,12 @@ Level tags `level::01` … `level::10` are the deciles of the quality pool's sco
 `data/levels.json`), so they mean the same thing in every variant.
 
 Sanity check: on the 9,000-sentence deck, whose author sorted by the frequency of the cloze word, our score rises
-monotonically across that deck's own difficulty quintiles (means ≈ 1300 / 2000 / 2500 / 3000 / 3500).
+monotonically across that deck's own difficulty quintiles (means ≈ 1300 / 2000 / 2500 / 3000 / 3500). That deck's
+*Difficulty* field ranks inflected surface forms from a Wiktionary frequency list (so *pasaste* counts as rare even
+though *pasar* is common), which is why it is kept as a field but not reused for ordering.
+
+Proper nouns are excluded from scoring, except that a lowercase token the parser tags as a name (it does this to
+unfamiliar verbs between two names, as in *Tom estafó a Mary*) is kept and treated as an unresolved content word.
 
 ### Regional flags
 - **vosotros**: a verb tagged second-person plural by the parser, an unambiguous ending

@@ -89,7 +89,9 @@ def main():
             elif tok.pos_ in ("VERB", "AUX") and "2" in tok.morph.get("Person") and "Plur" in tok.morph.get("Number"): vos.append(tok.text)
             elif tok.pos_ in ("VERB", "AUX") and w not in SAFE and len(w) > 4 and VOS_RE.search(w) and not w.endswith(("dad", "tad", "tud", "ed", "ados", "idos")): vos.append(tok.text)
             # a lowercase token tagged PROPN is a parser slip (e.g. "Tom estafó a Mary" tags the verb as a name): keep it
-            if (tok.pos_ in SKIP_POS and not (tok.pos_ == "PROPN" and tok.text[:1].islower())) or not re.search(r"[a-záéíóúñü]", w): continue
+            # ...and a sentence-initial capitalised verb between names ("¿Sobornó Tom a Mary?") is kept when it looks like a verb form
+            verbish_name = tok.pos_ == "PROPN" and (tok.text[:1].islower() or (tok.i <= 1 and bool(re.search(r"(ó|é|aron|ieron|aba|ía|ará|erá|irá|aste|iste)$", w))))
+            if (tok.pos_ in SKIP_POS and not verbish_name) or not re.search(r"[a-záéíóúñü]", w): continue
             if tok.pos_ in ("VERB", "AUX"):
                 mood, tense, vf = tok.morph.get("Mood"), tok.morph.get("Tense"), tok.morph.get("VerbForm")
                 if "Sub" in mood: feats.add("subj")
@@ -101,7 +103,9 @@ def main():
                 if "Ger" in vf: feats.add("ger")
             r, key = lookup(tok)
             if r is None:
-                if tok.pos_ in ("NOUN", "VERB", "ADJ", "ADV") and len(tok.text) > 2: unknown.append(tok.text); r, key = UNK, ""
+                # content word we could not rank (also lowercase tokens the parser mis-tagged as names, e.g. "Tom estafó a Mary")
+                content_like = tok.pos_ in ("NOUN", "VERB", "ADJ", "ADV") or verbish_name or (tok.text[:1].islower() and len(tok.text) >= 4 and tok.pos_ not in ("DET", "ADP", "PRON", "CCONJ", "SCONJ", "PART", "INTJ"))
+                if content_like and len(tok.text) > 2: unknown.append(tok.text); r, key = UNK, ""
                 else: continue
             ranks.append(r)
             if r > target[1]: target = (tok.text, r, key)
