@@ -69,6 +69,9 @@ def main():
     ap.add_argument("--sources", choices=["all", "tatoeba"], default="all")
     ap.add_argument("--level", choices=list(LEVEL_POLICY), default="none")
     ap.add_argument("--review-cap", type=int, default=1000, help="max sentences kept as reviews from the band under --level")
+    ap.add_argument("--rank-tiers", action="store_true", help="personal tiering by vocabulary: hardest word in top 1000 (no subj/cond) = long review, in top 2000 = shorter review, else new")
+    ap.add_argument("--known-ivl", default="90-180,45-90", help="with --rank-tiers: Read and Translate interval ranges (days) for the known tier")
+    ap.add_argument("--probable-ivl", default="30-90,14-45", help="with --rank-tiers: Read and Translate interval ranges (days) for the probable tier")
     ap.add_argument("--level-min", type=int, default=1, help="keep only sentences at this level tag or above (1-10)")
     ap.add_argument("--curation", help="curation TSV from curate.py: drops near-duplicates and extra low-quality lines")
     ap.add_argument("--keep-list", help="text file of sentences (one per line) selected by coverage_pick.py for the easy section")
@@ -119,10 +122,21 @@ def main():
         q = SRC_PEN[r["src"]] + 150 * r["has_name"] + 120 * r["unknown"] + (80 if r["n"] < 6 else 0) + (60 if r["n"] > 12 else 0)
         q += 300 * r["spain_w"] + (5000 if r["vosotros"] else 0) + (400 if r["quality"] == 0 else 0)
         return q - (40 if r["audio"] else 0)
-    studied = [r for r in rows if r["level"] not in drop_lv and r["level"] not in rev_lv]
-    band = sorted([r for r in rows if r["level"] in rev_lv and not r["vosotros"]], key=lambda r: (quality(r) // 100, -r["score"]))
-    reviews = band[:a.review_cap]
-    for r in reviews: r["tier"] = "review"
+    if a.rank_tiers:
+        def rng(spec): return [tuple(int(x) for x in part.split("-")) for part in spec.split(",")]
+        KI, PI = rng(a.known_ivl), rng(a.probable_ivl)
+        studied, reviews = [], []
+        for r in rows:
+            hardgram = bool({"subj", "cond"} & set(r["feats"].split()))
+            if r["max_rank"] <= 1000 and not hardgram: r["tier"] = "known"; r["ivls"] = KI; reviews.append(r)
+            elif r["max_rank"] <= 2000: r["tier"] = "probable"; r["ivls"] = PI; reviews.append(r)
+            else: studied.append(r)
+        print(f"rank tiers: known {sum(1 for r in reviews if r['tier']=='known')}, probable {sum(1 for r in reviews if r['tier']=='probable')}, new {len(studied)}", file=sys.stderr)
+    else:
+        studied = [r for r in rows if r["level"] not in drop_lv and r["level"] not in rev_lv]
+        band = sorted([r for r in rows if r["level"] in rev_lv and not r["vosotros"]], key=lambda r: (quality(r) // 100, -r["score"]))
+        reviews = band[:a.review_cap]
+        for r in reviews: r["tier"] = "review"
     # ---- core / extended split and ordering
     studied.sort(key=lambda r: (quality(r), r["score"]))
     per = collections.Counter()
@@ -183,7 +197,8 @@ def main():
         for t in tags: tagc[t] += 1
         fields = [esc(r["es"]), esc(r["en"]), au, mark(r["es"], target), esc(target), esc(gloss), skeleton(r["es"], target), esc(target),
                   str(r["level"]), ", ".join(feats), SRC_LABEL[r["src"]], str(r["score"]), str(r["max_rank"]) if target and r["max_rank"] < 6500 else "", str(r["n"])]
-        if r["tier"] == "review": cards = [(0, did, random.randint(120, 240)), (1, did, random.randint(60, 150))]
+        if r["tier"] in ("known", "probable"): cards = [(0, did, random.randint(*r["ivls"][0])), (1, did, random.randint(*r["ivls"][1]))]
+        elif r["tier"] == "review": cards = [(0, did, random.randint(120, 240)), (1, did, random.randint(60, 150))]
         else: cards = [(0, did, 0), (1, did, 0)]
         w.add_note(MID, fields, tags, r["score"], cards)
     if a.split_core:
@@ -196,7 +211,7 @@ def main():
     desc = (f"{total} Spanish sentences with English translations, sorted by difficulty (hardest word's frequency rank, grammar, length). "
             f"Variant: <b>{a.variant}</b>, sources: <b>{a.sources}</b>, level preset: <b>{a.level}</b>" + ({"exclude": ", pre-C1 vocabulary only (every word inside the 5,000-word list)", "only": ", C1+ only (sentences with a word beyond the 5,000-word list)"}.get(a.c1, "")) + (", near-repetitions and subtitle lines with character names removed" if a.curation else "") + (f"; sentences made only of top-{a.keep_list_max_rank} words are limited to the ones that add a new word or grammar example" if a.keep_list else "") + ("; subtitle lines are included only where they add a word or grammar example that the Tatoeba sentences lack" if a.only_list else "") + (f", levels {a.level_min}&ndash;{a.level_max} only" if (a.level_min, a.level_max) != (1, 10) else "") + ". "
             + (f"<b>1 Core</b> = best {a.split_core} sentences per target word ({len(core)}); <b>2 Extended</b> = the rest ({len(rest)}). " if a.split_core else "")
-            + (f"{len(reviews)} sentences from the band just below the level start as long-interval reviews (tag tier::review). " if reviews else "")
+            + (f"Personal tiering: tier::known (hardest word in the top 1000, no subjunctive/conditional) starts as reviews due in {a.known_ivl.replace(',', ' / ')} days (Read / Translate); tier::probable (top 2000) in {a.probable_ivl.replace(',', ' / ')} days; the rest are new cards. " if a.rank_tiers else (f"{len(reviews)} sentences from the band just below the level start as long-interval reviews (tag tier::review). " if reviews else ""))
             + "Latin American learners: Spain-specific sentences are tagged region::vosotros / region::spain; search tag:region::* and suspend them. "
             "Tags: level::01-10 (difficulty deciles), gram::*, src::*, audio::*"
             + (", quality::low + drop::* for lines that failed the quality filter" if a.variant == "macro" else "") + ". "
