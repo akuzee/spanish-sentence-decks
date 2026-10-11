@@ -15,8 +15,8 @@ $(DATA)/vocab_words.tsv:
 	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --out ../$(DECKS)/Spanish_Top_5000_Merged.apkg --report ../$(DATA)/vocab_words.tsv --work ../work
 
 vocab-public: $(DATA)/vocab_words.tsv
-	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --mode public --out ../$(DECKS)/Spanish_Top_5000_Vocabulary_FullAudio.apkg --report ../$(DATA)/vocab_words_public.tsv --work ../work
-	cd $(PIPE) && $(PY) shrink_audio.py ../$(DECKS)/Spanish_Top_5000_Vocabulary_FullAudio.apkg --out ../$(DECKS)/Spanish_Top_5000_Vocabulary.apkg --bitrate 40k
+	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --mode public --out ../$(DECKS)/Spanish_Top_5000_Vocabulary.apkg --report ../$(DATA)/vocab_words_public.tsv --work ../work
+	# if a package still exceeds AnkiWeb's limit: shrink_audio.py re-encodes the MP3s (lossy); repack.py only re-compresses the zip (lossless)
 
 rankmap: $(DATA)/rankmap.json
 $(DATA)/rankmap.json: $(DATA)/vocab_words.tsv

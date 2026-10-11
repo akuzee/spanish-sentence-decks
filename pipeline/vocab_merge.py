@@ -345,7 +345,7 @@ out.write(dbp, "collection.anki2")
 media_json = {}
 for i, (fn, (src, idx)) in enumerate(sorted(media_out.items())):
     data = (zo if src == "old" else zn).read(idx)
-    out.writestr(zipfile.ZipInfo(str(i), date_time=time.localtime(now)[:6]), data, compress_type=zipfile.ZIP_STORED)
+    out.writestr(zipfile.ZipInfo(str(i), date_time=time.localtime(now)[:6]), data, compress_type=zipfile.ZIP_DEFLATED, compresslevel=6)
     media_json[str(i)] = fn
 out.writestr("media", json.dumps(media_json, ensure_ascii=False))
 out.close()

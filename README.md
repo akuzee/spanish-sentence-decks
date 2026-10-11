@@ -15,12 +15,12 @@ with two optional hints you can click when you are new to it).
 
 | deck | sentences | what it is | audio | where |
 |---|---|---|---|---|
-| **Spanish Sentences – sorted by difficulty** (main) | 54,754 | Every sentence that passes the quality filter (4–16 words, complete, no artifacts). Spain-specific sentences are tagged, not removed, and nudged a little later. | 6,041 native | **AnkiWeb**, Releases |
-| Macro | 78,016 | Every distinct line from all five sources, including 2–3-word fragments and odd lines, nothing removed (low-quality lines are tagged `quality::low`) | 9,262 native | AnkiWeb, Releases |
-| Latin American cut | 54,097 | The main deck minus the 657 sentences with *vosotros* or Spain-only vocabulary | 6,041 native | AnkiWeb, Releases |
-| Full audio | 54,754 | The main deck plus the 7500 deck's synthetic recordings (too big for AnkiWeb) | 13,556 | Releases |
-| Tatoeba only · Latin American cut | 13,191 | Only the two Tatoeba-based decks, for the cleanest licensing | 6,041 native (or all 13,191 in the full-audio file) | Releases |
-| B1 · Latin American · Core/Extended | 22,467 | A ready-made preset: easy levels dropped, 1,000 "probably known" sentences as long-interval reviews, best 2 sentences per target word in a *Core* subdeck | 9,610 | Releases |
+| **Spanish Sentences – sorted by difficulty** (main) | 54,754 | Every sentence that passes the quality filter (4–16 words, complete, no artifacts). Spain-specific sentences are tagged, not removed, and nudged a little later. | 6,041 native | **AnkiWeb**, Releases (96 MB) |
+| Macro | 78,016 | Every distinct line from all five sources, including 2–3-word fragments and odd lines, nothing removed (low-quality lines are tagged `quality::low`) | 9,262 native | AnkiWeb, Releases (131 MB) |
+| Latin American cut | 54,097 | The main deck minus the 657 sentences with *vosotros* or Spain-only vocabulary | 6,041 native | AnkiWeb, Releases (94 MB) |
+| Full audio | 54,754 | The main deck plus the 7500 deck's synthetic recordings (too big for AnkiWeb) | 13,556 | Releases (192 MB) |
+| Tatoeba only · Latin American cut | 13,191 | Only the two Tatoeba-based decks, for the cleanest licensing | 6,041 native (88 MB) or all 13,191 (182 MB) | Releases |
+| B1 · Latin American · Core/Extended | 22,467 | A ready-made preset: easy levels dropped, 1,000 "probably known" sentences as long-interval reviews, best 2 sentences per target word in a *Core* subdeck | 9,620 | Releases (142 MB) |
 
 All decks share the same note type and the same `level::01` … `level::10` tags, so you can switch or merge later.
 AnkiWeb has a file-size limit, so the AnkiWeb uploads carry only the native recordings; the full-audio files are
@@ -34,7 +34,8 @@ The same repository builds **Spanish Top 5000 Vocabulary (merged)**: the picture
 Top 5000* joined with the example sentences and audio of *New Spanish Top 5000 with Examples*, 5,601 words matched
 by headword and ordered by frequency, with `rank::` band, `cognate::` and `pos::` tags for cutting to your level
 (table in [docs/LEVELS.md](docs/LEVELS.md)). Its frequency ranks are also what the sentence scoring uses.
-AnkiWeb file (audio re-encoded, ~100 MB) and full-audio file (154 MB) are on Releases.
+One file, 105 MB, original audio: packages compress their media losslessly (see docs/METHOD.md), which is what
+brought it under AnkiWeb's limit.
 
 ## Adjust it to your level
 

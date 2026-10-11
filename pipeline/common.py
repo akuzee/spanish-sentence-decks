@@ -118,7 +118,8 @@ class PackageWriter:
         z.write(self.db_path, "collection.anki2")
         index = {}
         for i, (fn, data) in enumerate(sorted(self.media.items())):
-            z.writestr(zipfile.ZipInfo(str(i), date_time=time.localtime(self.now)[:6]), data, compress_type=zipfile.ZIP_STORED)
+            # media is deflated (Anki itself stores it raw): speech MP3s with silence padding shrink ~45%, losslessly
+            z.writestr(zipfile.ZipInfo(str(i), date_time=time.localtime(self.now)[:6]), data, compress_type=zipfile.ZIP_DEFLATED, compresslevel=6)
             index[str(i)] = fn
         z.writestr("media", json.dumps(index, ensure_ascii=False)); z.close()
         return os.path.getsize(out_path)

@@ -117,7 +117,14 @@ difference between the package's and the target collection's "today". Net effect
 90 days" is due 90 days after the *build* date. `verify.py` checks this by importing into a collection that is
 artificially 400 days old. Import within a few days of building, or rebuild.
 
-## 7. Known limitations
+## 7. Packaging
+Anki writes media into an .apkg uncompressed. Our writers deflate every entry instead, which is lossless and
+imports normally, and happens to matter a lot for synthetic speech: the Azure recordings in the vocabulary deck
+shrink to ~52% (silence padding compresses), real recordings barely change. That is the difference between 154 MB
+and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any existing package;
+`pipeline/shrink_audio.py` is the lossy fallback (re-encode MP3s with ffmpeg) if a deck is still too big.
+
+## 8. Known limitations
 - About 8% of sentences contain a content word the lemmatiser could not map (mostly genuinely rare words), which
   pushes them slightly later than they deserve.
 - The parser occasionally misses a subjunctive or tags *hubieras* as indicative; grammar weights are therefore a

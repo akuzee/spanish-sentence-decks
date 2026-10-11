@@ -74,4 +74,3 @@ Guide and method: https://github.com/akuzee/spanish-sentence-decks (docs/LEVELS.
 CREDITS
 Built from the AnkiWeb decks "Essential Spanish Vocabulary Top 5000" and "New Spanish Top 5000 with Examples";
 thanks to both authors. Word list and glosses follow Mark Davies' A Frequency Dictionary of Spanish (Routledge).
-Audio was re-encoded to fit AnkiWeb's size limit; a full-quality version is on GitHub.
