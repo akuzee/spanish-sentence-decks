@@ -7,3 +7,4 @@ _build_*/
 __pycache__/
 venv/
 sources.json
+work_pipeline.log
