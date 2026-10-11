@@ -1,6 +1,6 @@
 # AnkiWeb description (main deck)
 
-Deck title: **Ultimate Top 43,803 Spanish Sentences – Best Decks Merged**
+Deck title: **Ultimate top 43,803 spanish sentences - best decks merged**
 
 ---
 
@@ -9,8 +9,7 @@ The best Spanish sentence decks on AnkiWeb, combined into one and sorted from ea
 43,803 sentences with English translations, pulled from five popular decks (the two Tatoeba decks, Neri's
 Spanish Sentences 1–3), de-duplicated, with fragments, broken lines and typos filtered out. Audio on 8,303 of them
 (native recordings where they exist, a synthetic voice otherwise). This is the easiest 80% of the pool, roughly A1
-through B2; the hardest 20% is a separate deck, "… Best Decks Merged (extra 10,951 challenge sentences)", which installs
-as a second section of this one. Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
+through B2; the hardest 20% is a separate deck, "Ultimate top 43,803 spanish sentences - best decks merged (extra 10,951 challenge sentences)". Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
 subjunctive or conditional), so the deck starts with "Es lo que es" and ends with the subjunctive and rare
 vocabulary.
 
@@ -43,12 +42,11 @@ issue on GitHub.
 
 # Challenge deck
 
-Deck title: **Ultimate Top 43,803 Spanish Sentences – Best Decks Merged (extra 10,951 challenge sentences)**
+Deck title: **Ultimate top 43,803 spanish sentences - best decks merged (extra 10,951 challenge sentences)**
 
-The hardest 20% of "Ultimate Top 43,803 Spanish Sentences – Best Decks Merged": 10,951 sentences whose key word is rare or beyond
+The hardest 20% of "Ultimate top 43,803 spanish sentences - best decks merged": 10,951 sentences whose key word is rare or beyond
 the 5,000 most frequent words, or that stack subjunctive, conditional and perfect tenses. Roughly B2 and up.
-Audio on 5,253 of them. Same cards, tags and credits as the main deck; install both and they appear as two
-sections of one deck. Start here only if the main deck's level 8 feels easy.
+Audio on 5,253 of them. Same cards, tags and credits as the main deck. Start here only if the main deck's level 8 feels easy.
 
 (SUPPORT and CREDITS blocks as in the main deck.)
 
@@ -63,7 +61,7 @@ quality::low so you can cut them yourself. Link to GitHub for the rest, plus the
 
 # Vocabulary deck
 
-Deck title: **Ultimate Top 5000 Spanish Vocab – Best Decks Merged**
+Deck title: **Ultimate top 5000 spanish vocab - best decks merged**
 
 The two best "Top 5000" Spanish vocabulary decks on AnkiWeb, merged into one: the pictures from *Essential
 Spanish Vocabulary Top 5000* and the example sentences and natural-sounding audio from *New Spanish Top 5000

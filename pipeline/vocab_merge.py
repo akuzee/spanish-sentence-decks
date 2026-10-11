@@ -274,7 +274,7 @@ if _a.mode == "public":
             "nm masculine noun, nm/f masc/fem noun, nmf noun with masc/fem meanings, num number, prep preposition, pron pronoun, v verb.<br>"
             "Word list and glosses follow Mark Davies' <i>A Frequency Dictionary of Spanish</i>. Method and sources: github.com/akuzee/spanish-sentence-decks<br><br>"
             "If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.") % len(merged)
-    DECK_NAME = "Ultimate Top 5000 Spanish Vocab – Best Decks Merged"
+    DECK_NAME = "Ultimate top 5000 spanish vocab - best decks merged"
 else:
     DECK_NAME = "Spanish Top 5000 (merged)"
 deck.update(id=DID, name=DECK_NAME, mod=now, usn=-1, desc=DESC, conf=1, newToday=[0,0], revToday=[0,0], lrnToday=[0,0], timeToday=[0,0])
