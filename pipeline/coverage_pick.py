@@ -4,7 +4,11 @@ represented at each level, and sentence quality breaks ties. Greedy set cover ov
 import argparse, csv, json, re, sys, collections
 import spacy, simplemma
 ap = argparse.ArgumentParser(); ap.add_argument("--scored", required=True); ap.add_argument("--levels", required=True); ap.add_argument("--rankmap", required=True)
-ap.add_argument("--k", type=int, default=3, help="target appearances per list word"); ap.add_argument("--max-level", type=int, default=8); ap.add_argument("--out"); ap.add_argument("--min-per-level", type=int, default=0, help="after coverage, top each level up to this many sentences with the best-quality leftovers")
+ap.add_argument("--k", type=int, default=3, help="target appearances per list word")
+ap.add_argument("--k-scheme", default="", help="rank-dependent targets, e.g. 1000:3,3000:5,5000:8 (words up to rank 1000 need 3 examples, ...)")
+ap.add_argument("--curation", help="curation TSV: drop near-duplicates, low-quality and C1+ sentences")
+ap.add_argument("--gram-per-level", type=int, default=40)
+ap.add_argument("--max-rank", type=int, default=0, help="restrict the selection to sentences whose hardest word is within this rank (the easy section); 0 = all"); ap.add_argument("--max-level", type=int, default=8); ap.add_argument("--out"); ap.add_argument("--min-per-level", type=int, default=0, help="after coverage, top each level up to this many sentences with the best-quality leftovers")
 a = ap.parse_args()
 cuts = json.load(open(a.levels))["cuts"]; RM = json.load(open(a.rankmap, encoding="utf-8")); rank = {k: v[0] for k, v in RM.items()}
 rows = [r for r in csv.DictReader(open(a.scored, encoding="utf-8"), delimiter="\t") if r["quality"] == "1"]
@@ -12,6 +16,15 @@ for r in rows:
     for k in ("max_rank","unknown","n","has_name","spain_w","score"): r[k] = int(r[k])
     r["level"] = 1 + sum(1 for c in cuts if r["score"] >= c)
 rows = [r for r in rows if r["level"] <= a.max_level]
+if a.max_rank: rows = [r for r in rows if r["max_rank"] <= a.max_rank]
+if a.curation:
+    cur = {c["es"]: c for c in csv.DictReader(open(a.curation, encoding="utf-8"), delimiter="\t")}
+    rows = [r for r in rows if not cur.get(r["es"], {}).get("neardup") and not cur.get(r["es"], {}).get("lowq") and cur.get(r["es"], {}).get("c1") != "1"]
+scheme = sorted((int(x.split(":")[0]), int(x.split(":")[1])) for x in a.k_scheme.split(",")) if a.k_scheme else []
+def K(l):
+    for lim, k in scheme:
+        if rank[l] <= lim: return k
+    return scheme[-1][1] if scheme else a.k
 nlp = spacy.load("es_core_news_md", disable=["ner", "parser"])
 SKIP = {"PUNCT","PROPN","NUM","SYM","X","SPACE","DET","ADP","PRON","CCONJ","SCONJ","PART","AUX"}
 for r, doc in zip(rows, nlp.pipe((r["es"] for r in rows), batch_size=512)):
@@ -25,8 +38,8 @@ PEN = {"tatoeba_native": 0, "tatoeba_tts": 60, "neri2": 120, "neri3": 220, "neri
 def quality(r): return PEN[r["src"]] + 150*r["has_name"] + 120*r["unknown"] + (80 if r["n"]<6 else 0) + (60 if r["n"]>12 else 0) + 300*r["spain_w"] + (5000 if r["vosotros"] else 0) - (40 if r["audio"] else 0)
 need = collections.Counter(); 
 for r in rows:
-    for l in r["lem"]: need[l] = a.k
-gram_need = {(f, L): 40 for f in ("subj","cond","perf","past","fut","imper","ger") for L in range(1, a.max_level + 1)}
+    for l in r["lem"]: need[l] = K(l)
+gram_need = {(f, L): a.gram_per_level for f in ("subj","cond","perf","past","fut","imper","ger") for L in range(1, a.max_level + 1)}
 def gain(r):
     g = sum((1 + rank[l] / 1000) for l in r["lem"] if need[l] > 0)          # rarer words are worth more
     g += sum(0.5 for f in r["feats"].split() if gram_need.get((f, r["level"]), 0) > 0)
@@ -53,9 +66,9 @@ if a.min_per_level:
         extra = sorted([pool[i] for i in range(len(pool)) if not taken[i] and pool[i]["level"] == L], key=lambda r: (quality(r), r["score"]))
         for r in extra[:max(0, a.min_per_level - byl[L])]: chosen.append(r)
 src = collections.Counter(r["src"] for r in chosen)
-print(f"K={a.k}, levels<= {a.max_level}: {len(chosen)} sentences | audio {sum(1 for r in chosen if r['audio'])} | tatoeba {src['tatoeba_native']+src['tatoeba_tts']}, neri1/2 {src['neri1']+src['neri2']}, neri3 {src['neri3']}")
+print(f"scheme={a.k_scheme or a.k}, levels<= {a.max_level}: {len(chosen)} sentences | audio {sum(1 for r in chosen if r['audio'])} | tatoeba {src['tatoeba_native']+src['tatoeba_tts']}, neri1/2 {src['neri1']+src['neri2']}, neri3 {src['neri3']}")
 words = {l for r in rows for l in r['lem']}; covered = sum(1 for l in words if need[l] == 0)
-print(f"  list words appearing in the pool: {len(words)}; fully covered {a.k}x: {covered}; mean sentences per level: {len(chosen)/a.max_level:.0f}; mean words/sentence {sum(r['n'] for r in chosen)/len(chosen):.1f}")
+print(f"  list words appearing in the pool: {len(words)}; fully covered: {covered}; mean sentences per level: {len(chosen)/a.max_level:.0f}; mean words/sentence {sum(r['n'] for r in chosen)/len(chosen):.1f}")
 print("  level mix:", dict(sorted(collections.Counter(r['level'] for r in chosen).items())))
 if a.out:
     with open(a.out, "w", encoding="utf-8") as f:

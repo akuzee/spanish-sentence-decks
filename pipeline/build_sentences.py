@@ -71,6 +71,8 @@ def main():
     ap.add_argument("--review-cap", type=int, default=1000, help="max sentences kept as reviews from the band under --level")
     ap.add_argument("--level-min", type=int, default=1, help="keep only sentences at this level tag or above (1-10)")
     ap.add_argument("--curation", help="curation TSV from curate.py: drops near-duplicates and extra low-quality lines")
+    ap.add_argument("--keep-list", help="text file of sentences (one per line) selected by coverage_pick.py for the easy section")
+    ap.add_argument("--keep-list-max-rank", type=int, default=1000, help="sentences whose hardest word is within this rank are kept only if they are in --keep-list")
     ap.add_argument("--c1", choices=["all", "exclude", "only"], default="all", help="with --curation: keep all sentences, only pre-C1 ones, or only C1+ ones")
     ap.add_argument("--level-max", type=int, default=10, help="keep only sentences at this level tag or below (1-10)")
     ap.add_argument("--split-core", type=int, default=0, help="N best sentences per target word go to '1 Core'; 0 = flat deck")
@@ -101,6 +103,11 @@ def main():
         if a.c1 == "exclude": rows = [r for r in rows if cur.get(r["es"], {}).get("c1") != "1"]
         if a.c1 == "only": rows = [r for r in rows if cur.get(r["es"], {}).get("c1") == "1"]
         print(f"curation: {before} -> {len(rows)} sentences (c1={a.c1})", file=sys.stderr)
+    if a.keep_list:
+        keep = set(l.rstrip("\n") for l in open(a.keep_list, encoding="utf-8"))
+        before = len(rows)
+        rows = [r for r in rows if r["max_rank"] > a.keep_list_max_rank or r["es"] in keep]
+        print(f"easy section (hardest word within top {a.keep_list_max_rank}): kept {sum(1 for r in rows if r['max_rank'] <= a.keep_list_max_rank)} of {before - sum(1 for r in rows if r['max_rank'] > a.keep_list_max_rank)}", file=sys.stderr)
     # ---- level policy
     drop_lv, rev_lv = LEVEL_POLICY[a.level]
     def quality(r):
@@ -182,7 +189,7 @@ def main():
         for r in rest + reviews: add(r, DID_P)
     total = len(core) + len(rest) + len(reviews)
     desc = (f"{total} Spanish sentences with English translations, sorted by difficulty (hardest word's frequency rank, grammar, length). "
-            f"Variant: <b>{a.variant}</b>, sources: <b>{a.sources}</b>, level preset: <b>{a.level}</b>" + ({"exclude": ", pre-C1 vocabulary only (every word inside the 5,000-word list)", "only": ", C1+ only (sentences with a word beyond the 5,000-word list)"}.get(a.c1, "")) + (", near-repetitions and subtitle lines with character names removed" if a.curation else "") + (f", levels {a.level_min}&ndash;{a.level_max} only" if (a.level_min, a.level_max) != (1, 10) else "") + ". "
+            f"Variant: <b>{a.variant}</b>, sources: <b>{a.sources}</b>, level preset: <b>{a.level}</b>" + ({"exclude": ", pre-C1 vocabulary only (every word inside the 5,000-word list)", "only": ", C1+ only (sentences with a word beyond the 5,000-word list)"}.get(a.c1, "")) + (", near-repetitions and subtitle lines with character names removed" if a.curation else "") + (f"; sentences made only of top-{a.keep_list_max_rank} words are limited to the ones that add a new word or grammar example" if a.keep_list else "") + (f", levels {a.level_min}&ndash;{a.level_max} only" if (a.level_min, a.level_max) != (1, 10) else "") + ". "
             + (f"<b>1 Core</b> = best {a.split_core} sentences per target word ({len(core)}); <b>2 Extended</b> = the rest ({len(rest)}). " if a.split_core else "")
             + (f"{len(reviews)} sentences from the band just below the level start as long-interval reviews (tag tier::review). " if reviews else "")
             + "Latin American learners: Spain-specific sentences are tagged region::vosotros / region::spain; search tag:region::* and suspend them. "

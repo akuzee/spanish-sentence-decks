@@ -88,7 +88,14 @@ Three flags per sentence, each a judgement call made once and documented here:
 - **extra low quality**: on top of the pool filter, subtitle lines that carry a character name (1,346) and lines that
   trail off with an ellipsis (11).
 
-Not applied, deliberately: a cap on how many sentences share a target word. The most common target words ("todo",
+- **easy-section coverage** (`pipeline/coverage_pick.py`): 26,945 of the pre-C1 sentences use only top-1,000
+  words, far more than anyone needs to learn those words, which recur in every harder sentence anyway. A sentence
+  from that section is kept only if it adds a new example for a word that has fewer than 3 (each of the 965
+  top-1,000 lemmas present gets three), or for a grammar feature that has fewer than 40 at its level; a greedy pass
+  picks the sentences that cover the most unmet needs, with Tatoeba source, audio and the absence of names as
+  tie-breakers. 2,509 survive. Sentences with any word beyond rank 1,000 are not subject to this.
+
+Not applied, deliberately: a cap on how many sentences share a target word above the easy section. The most common target words ("todo",
 "favor", "aquí") head hundreds of sentences each, but those are sentences made entirely of common words, which is
 exactly what the easy levels should contain.
 
@@ -143,7 +150,7 @@ and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any
 The sentence decks' native recordings are real speech and barely compress, and the synthetic clips are already
 lean 32 kbps files, so the 54,754-sentence deck with all its audio (192 MB) cannot be squeezed under AnkiWeb's limit
 without audible loss. The AnkiWeb release therefore splits the deck by vocabulary (`--c1 exclude` / `--c1 only`): the curated pre-C1
-deck (150 MB) and the C1+ deck (40 MB), each with every recording untouched. Native recordings are never
+deck (111 MB) and the C1+ deck (40 MB), each with every recording untouched. Native recordings are never
 re-encoded in any build (also a condition of their CC BY-NC-ND license). For other size targets the builder also has
 `--tts-max-level` (drop synthetic clips above a level) and `--tts-bitrate` (re-encode them, average-bitrate mono),
 and `pipeline/shrink_audio.py` is the blunt fallback that re-encodes every MP3 in a package.

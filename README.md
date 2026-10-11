@@ -15,8 +15,8 @@ with two optional hints you can click when you are new to it).
 
 | deck | sentences | what it is | audio | where |
 |---|---|---|---|---|
-| **Ultimate top 40000 spanish sentences - best decks merged** (main) | 46,141 | Every quality sentence whose vocabulary sits inside the 5,000-word list (pre-C1), with near-repetitions and subtitle lines carrying character names removed. Spain-specific sentences are tagged, not removed. | 10,812 (all original quality) | **AnkiWeb**, Releases (150 MB) |
-| **Ultimate top 40000 spanish sentences - best decks merged (extra 4,701 challenge sentences)** | 4,701 | Sentences that need C1 vocabulary: a word beyond the 5,000 list, or two words beyond rank 4,000. Same curation. | 2,581 | **AnkiWeb**, Releases (40 MB) |
+| **Ultimate top 20000 spanish sentences - best decks merged** (main) | 21,705 | Quality sentences with pre-C1 vocabulary (inside the 5,000-word list), near-repetitions and subtitle lines with character names removed. Sentences made only of top-1,000 words are kept only while they add a new word or grammar example (2,509 of 26,945), so the easy end doesn't drag on. Spain-specific sentences are tagged, not removed. | 7,810 (all original quality) | **AnkiWeb**, Releases (111 MB) |
+| **Ultimate top 20000 spanish sentences - best decks merged (extra 4,701 challenge sentences)** | 4,701 | Sentences that need C1 vocabulary: a word beyond the 5,000 list, or two words beyond rank 4,000. Same curation. | 2,581 | **AnkiWeb**, Releases (40 MB) |
 | Macro | 78,016 | Every distinct line from all five sources, including 2–3-word fragments and odd lines, nothing removed (low-quality lines are tagged `quality::low`), in difficulty order | 9,262 native | Releases (131 MB); AnkiWeb later |
 | One-file main deck | 54,754 | Levels 1–10 in one file, uncurated, all audio | 13,556 | Releases (192 MB) |
 | Latin American cut | 54,097 | The uncurated deck minus the 657 sentences with *vosotros* or Spain-only vocabulary | 13,191 | Releases (187 MB) |
@@ -24,8 +24,8 @@ with two optional hints you can click when you are new to it).
 | B1 · Latin American · Core/Extended | 22,467 | A ready-made preset: easy levels dropped, 1,000 "probably known" sentences as long-interval reviews, best 2 sentences per target word in a *Core* subdeck | 9,620 | Releases (142 MB) |
 
 All decks share the same note type and the same `level::01` … `level::10` tags, so you can switch or merge later.
-AnkiWeb has a file-size limit of about 150 MB; the main deck sits right at it, with every recording at its original
-quality (a 28 kbps fallback for the synthetic clips is one build flag away if AnkiWeb refuses it). The one-file versions are on
+AnkiWeb has a file-size limit of about 150 MB; all three AnkiWeb files are under it with every recording at its
+original quality. The one-file versions are on
 [Releases](https://github.com/akuzee/spanish-sentence-decks/releases). Everything rebuilds locally with `make decks`.
 
 **Download:** AnkiWeb: *(links added after upload)* · GitHub: [Releases](https://github.com/akuzee/spanish-sentence-decks/releases)
