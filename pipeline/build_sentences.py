@@ -74,7 +74,7 @@ def main():
     ap.add_argument("--vosotros-penalty", type=int, default=1000, help="how far vosotros sentences are pushed back in the order (score points; ~1000 = one level later, 3000 = to the end)")
     ap.add_argument("--audio", choices=["all", "native", "none"], default="all", help="which recordings to include: all, only the native (Tatoeba/arh) ones, or none")
     ap.add_argument("--tts-max-level", type=int, default=10, help="with --audio all: include the synthetic (TTS) recordings only for sentences up to this level (1-10)")
-    ap.add_argument("--tts-bitrate", default="", help="with --audio all: re-encode the synthetic recordings to this MP3 bitrate, mono (e.g. 24k) to fit AnkiWeb's size limit; native recordings are never touched")
+    ap.add_argument("--tts-bitrate", default="", help="with --audio all: re-encode the synthetic recordings to this average MP3 bitrate (mono, 16 kHz; e.g. 20k) to fit AnkiWeb's size limit; native recordings are never touched")
     ap.add_argument("--name", required=True, help="deck name"); ap.add_argument("--out", required=True); ap.add_argument("--report")
     ap.add_argument("--seed", type=int, default=2026)
     a = ap.parse_args(); random.seed(a.seed)
@@ -125,7 +125,7 @@ def main():
             data = pk["tatoeba_tts"].read_media(fn)
             if not data: return fn, None
             src = os.path.join(tmp, str(abs(hash(fn))) + ".mp3"); dst = src + ".out.mp3"; open(src, "wb").write(data)
-            ok = subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-ac", "1", "-ar", "22050", "-c:a", "libmp3lame", "-b:a", a.tts_bitrate, dst], capture_output=True).returncode == 0
+            ok = subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-ac", "1", "-ar", "16000", "-c:a", "libmp3lame", "-abr", "1", "-b:a", a.tts_bitrate, dst], capture_output=True).returncode == 0
             out = open(dst, "rb").read() if ok else data
             for f in (src, dst):
                 try: os.remove(f)

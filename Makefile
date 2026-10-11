@@ -34,10 +34,10 @@ $(DATA)/scored.tsv: $(DATA)/pool.tsv $(DATA)/rankmap.json
 BUILD = cd $(PIPE) && $(PY) build_sentences.py --scored ../$(DATA)/scored.tsv --levels ../$(DATA)/levels.json --rankmap ../$(DATA)/rankmap.json --sources-json ../sources.json --work ../work
 decks: $(DATA)/scored.tsv
 	mkdir -p $(DECKS)
-	# AnkiWeb uploads (<150 MB): native recordings untouched; synthetic recordings for levels 1-8 at 24 kbps mono (Macro: native only)
-	$(BUILD) --variant quality --audio all --tts-max-level 8 --tts-bitrate 24k --name "Spanish Sentences – sorted by difficulty" --out ../$(DECKS)/Spanish_Sentences.apkg --report ../$(DATA)/report_quality.tsv
+	# AnkiWeb uploads (<150 MB): native recordings untouched; synthetic recordings for levels 1-9 at ~20 kbps mono (Macro: native only)
+	$(BUILD) --variant quality --audio all --tts-max-level 9 --tts-bitrate 20k --name "Spanish Sentences – sorted by difficulty" --out ../$(DECKS)/Spanish_Sentences.apkg --report ../$(DATA)/report_quality.tsv
 	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)" --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
-	$(BUILD) --variant latam   --audio all --tts-max-level 8 --tts-bitrate 24k --name "Spanish Sentences – Latin American cut"  --out ../$(DECKS)/Spanish_Sentences_LatAm.apkg --report ../$(DATA)/report_latam.tsv
+	$(BUILD) --variant latam   --audio all --tts-max-level 9 --tts-bitrate 20k --name "Spanish Sentences – Latin American cut"  --out ../$(DECKS)/Spanish_Sentences_LatAm.apkg --report ../$(DATA)/report_latam.tsv
 	# full-audio builds (also include the 7500 deck's TTS recordings), for GitHub Releases
 	$(BUILD) --variant quality --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg
 	$(BUILD) --variant latam --sources tatoeba --name "Spanish Sentences – Tatoeba only (LatAm cut)" --out ../$(DECKS)/Spanish_Sentences_Tatoeba_LatAm.apkg

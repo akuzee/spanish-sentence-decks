@@ -124,9 +124,11 @@ shrink to ~52% (silence padding compresses), real recordings barely change. That
 and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any existing package.
 
 The sentence decks' native recordings are real speech and barely compress, so the AnkiWeb builds use two more
-knobs in `build_sentences.py`: `--tts-max-level 8` drops the synthetic recordings for the hardest two levels (they
-are the longest sentences and hold 45% of the synthetic audio by size) and `--tts-bitrate 24k` re-encodes the rest
-to mono 24 kbps (the originals are 32 kbps). Native recordings are never re-encoded (also a condition of their
+knobs in `build_sentences.py`: `--tts-max-level 9` drops the synthetic recordings for the hardest level (its sentences are
+the longest and hold a quarter of the synthetic audio by size) and `--tts-bitrate 20k` re-encodes the rest as
+average-bitrate mono MP3 at 16 kHz (the originals are 32 kbps; MP3 at 16 kHz only offers fixed 16 or 24 kbps, so
+average-bitrate mode is what makes 20 possible). Trimming silence did not help: the encoder spends the saved bits
+elsewhere. Native recordings are never re-encoded (also a condition of their
 CC BY-NC-ND license). `pipeline/shrink_audio.py` is the blunt fallback that re-encodes every MP3 in a package.
 
 ## 8. Known limitations

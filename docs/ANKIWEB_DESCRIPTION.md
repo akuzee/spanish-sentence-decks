@@ -7,9 +7,9 @@ Deck title: **Spanish Sentences – sorted by difficulty (54k sentences, native 
 The best Spanish sentence decks on AnkiWeb, combined into one and sorted from easy to hard.
 
 54,754 sentences with English translations, pulled from five popular decks (the two Tatoeba decks, Neri's
-Spanish Sentences 1–3), de-duplicated, with fragments, broken lines and typos filtered out. Audio on 10,654 of
-them: 6,192 native recordings and 4,462 synthetic ones (the synthetic voice stops at level 8 to fit AnkiWeb's size
-limit; a full-audio version is on GitHub). Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
+Spanish Sentences 1–3), de-duplicated, with fragments, broken lines and typos filtered out. Audio on 12,008 of
+them: 6,192 native recordings and 5,816 synthetic ones (the synthetic voice stops at level 9, the hardest 10% being
+text-only unless a native recording exists, to fit AnkiWeb's size limit; a full-audio version is on GitHub). Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
 subjunctive or conditional), so the deck starts with "Es lo que es" and ends with the subjunctive and rare
 vocabulary.
 
