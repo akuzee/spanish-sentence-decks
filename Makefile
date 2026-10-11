@@ -27,16 +27,19 @@ $(DATA)/pool.tsv: sources.json
 	mkdir -p $(DATA)
 	cd $(PIPE) && $(PY) pool.py --sources ../sources.json --work ../work --out ../$(DATA)/pool.tsv
 
-score: $(DATA)/scored.tsv
+score: $(DATA)/scored.tsv $(DATA)/curation.tsv
+$(DATA)/curation.tsv: $(DATA)/scored.tsv
+	cd $(PIPE) && $(PY) curate.py --scored ../$(DATA)/scored.tsv --rankmap ../$(DATA)/rankmap.json --out ../$(DATA)/curation.tsv
+
 $(DATA)/scored.tsv: $(DATA)/pool.tsv $(DATA)/rankmap.json
 	cd $(PIPE) && $(PY) score.py --pool ../$(DATA)/pool.tsv --rankmap ../$(DATA)/rankmap.json --out ../$(DATA)/scored.tsv --levels ../$(DATA)/levels.json
 
 BUILD = cd $(PIPE) && $(PY) build_sentences.py --scored ../$(DATA)/scored.tsv --levels ../$(DATA)/levels.json --rankmap ../$(DATA)/rankmap.json --sources-json ../sources.json --work ../work
-decks: $(DATA)/scored.tsv
+decks: $(DATA)/scored.tsv $(DATA)/curation.tsv
 	mkdir -p $(DECKS)
-	# AnkiWeb uploads (<150 MB each): the main deck is split in two so every recording stays at its original quality
-	$(BUILD) --variant quality --audio all --level-max 8 --name "Ultimate top 40000 spanish sentences - best decks merged" --out "../$(DECKS)/Ultimate top 40000 spanish sentences - best decks merged.apkg"   --report ../$(DATA)/report_levels_1-8.tsv
-	$(BUILD) --variant quality --audio all --level-min 9 --name "Ultimate top 40000 spanish sentences - best decks merged (extra 10,951 challenge sentences)" --out "../$(DECKS)/Ultimate top 40000 spanish sentences - best decks merged (extra 10,951 challenge sentences).apkg" --report ../$(DATA)/report_levels_9-10.tsv
+	# AnkiWeb uploads (<150 MB each): main = curated pre-C1 vocabulary, challenge = C1+, every recording at original quality
+	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 exclude --name "Ultimate top 40000 spanish sentences - best decks merged" --out "../$(DECKS)/Ultimate top 40000 spanish sentences - best decks merged.apkg"   --report ../$(DATA)/report_levels_1-8.tsv
+	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 only --name "Ultimate top 40000 spanish sentences - best decks merged (extra 4,701 challenge sentences)" --out "../$(DECKS)/Ultimate top 40000 spanish sentences - best decks merged (extra 4,701 challenge sentences).apkg" --report ../$(DATA)/report_levels_9-10.tsv
 	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)"     --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
 	# GitHub Releases only (no size limit): one-file versions with all audio
 	$(BUILD) --variant quality --audio all --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg --report ../$(DATA)/report_quality.tsv

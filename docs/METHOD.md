@@ -75,6 +75,23 @@ unfamiliar verbs between two names, as in *Tom estafó a Mary*) is kept and trea
   differently (*ordenador, zumo, patata, coger, vale, piso, tío, autobús, conducir, enfadado, echar de menos,
   gilipollas …*), weighted 1 (common elsewhere too) or 2 (strong marker) → tag `region::spain`. 470 sentences.
 
+## 3b. Curation for the published decks (`pipeline/curate.py`)
+Three flags per sentence, each a judgement call made once and documented here:
+
+- **C1+**: the sentence needs C1-level vocabulary: a content word outside the 5,000-word list, or two or more
+  words beyond rank 4,000 (a common B2 ceiling). 4,810 of the 54,754 quality sentences. Everything else is "pre-C1"
+  and goes in the main deck; the C1+ sentences form the challenge deck. The reasoning: sentence drilling pays off
+  up to about C1, after which ordinary reading and listening does the job, but the material is kept for completeness.
+- **near-repetition**: the same bag of lemmas with the same grammar features as a better sentence, or an 85%+
+  lemma overlap for sentences of six words or more, again with the same grammar. A different tense is not a
+  repetition (*lo hizo* / *lo haré* both stay). 2,555 removed; the kept copy is the best-quality one.
+- **extra low quality**: on top of the pool filter, subtitle lines that carry a character name (1,346) and lines that
+  trail off with an ellipsis (11).
+
+Not applied, deliberately: a cap on how many sentences share a target word. The most common target words ("todo",
+"favor", "aquí") head hundreds of sentences each, but those are sentences made entirely of common words, which is
+exactly what the easy levels should contain.
+
 ## 4. Building (`pipeline/build_sentences.py`)
 Variants: `macro` (everything), `quality` (quality flag only), `latam` (quality minus both regional flags).
 `--sources tatoeba` restricts to the two Tatoeba decks.
@@ -125,8 +142,8 @@ and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any
 
 The sentence decks' native recordings are real speech and barely compress, and the synthetic clips are already
 lean 32 kbps files, so the 54,754-sentence deck with all its audio (192 MB) cannot be squeezed under AnkiWeb's limit
-without audible loss. The AnkiWeb release therefore splits the deck by level (`--level-max 8` / `--level-min 9`):
-levels 1–8 (111 MB) and levels 9–10 (81 MB), each with every recording untouched. Native recordings are never
+without audible loss. The AnkiWeb release therefore splits the deck by vocabulary (`--c1 exclude` / `--c1 only`): the curated pre-C1
+deck (150 MB) and the C1+ deck (40 MB), each with every recording untouched. Native recordings are never
 re-encoded in any build (also a condition of their CC BY-NC-ND license). For other size targets the builder also has
 `--tts-max-level` (drop synthetic clips above a level) and `--tts-bitrate` (re-encode them, average-bitrate mono),
 and `pipeline/shrink_audio.py` is the blunt fallback that re-encodes every MP3 in a package.

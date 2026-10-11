@@ -6,10 +6,11 @@ Deck title: **Ultimate top 40000 spanish sentences - best decks merged**
 
 The best Spanish sentence decks on AnkiWeb, combined into one and sorted from easy to hard.
 
-43,803 sentences with English translations, pulled from five popular decks (the two Tatoeba decks, Neri's
-Spanish Sentences 1–3), de-duplicated, with fragments, broken lines and typos filtered out. Audio on 8,303 of them
-(native recordings where they exist, a synthetic voice otherwise). This is the easiest 80% of the pool, roughly A1
-through B2; the hardest 20% is a separate deck, "Ultimate top 40000 spanish sentences - best decks merged (extra 10,951 challenge sentences)". Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
+46,141 sentences with English translations, pulled from five popular decks (the two Tatoeba decks, Neri's
+Spanish Sentences 1–3), de-duplicated, with fragments, broken lines, near-repetitions and typos filtered out. Audio
+on 10,812 of them (native recordings where they exist, a synthetic voice otherwise). Everything here uses
+vocabulary inside the 5,000 most frequent words, i.e. up to B2; sentences that need rarer words are a separate
+deck, "Ultimate top 40000 spanish sentences - best decks merged (extra 4,701 challenge sentences)". Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
 subjunctive or conditional), so the deck starts with "Es lo que es" and ends with the subjunctive and rare
 vocabulary.
 
@@ -42,11 +43,10 @@ issue on GitHub.
 
 # Challenge deck
 
-Deck title: **Ultimate top 40000 spanish sentences - best decks merged (extra 10,951 challenge sentences)**
+Deck title: **Ultimate top 40000 spanish sentences - best decks merged (extra 4,701 challenge sentences)**
 
-The hardest 20% of "Ultimate top 40000 spanish sentences - best decks merged": 10,951 sentences whose key word is rare or beyond
-the 5,000 most frequent words, or that stack subjunctive, conditional and perfect tenses. Roughly B2 and up.
-Audio on 5,253 of them. Same cards, tags and credits as the main deck. Start here only if the main deck's level 8 feels easy.
+The C1+ companion to "Ultimate top 40000 spanish sentences - best decks merged": 4,701 sentences that need a word beyond the 5,000
+most frequent, or two words beyond the 4,000 mark. Audio on 2,581 of them. Same cards, tags and credits as the main deck. Start here only if the main deck's level 8 feels easy.
 
 (SUPPORT and CREDITS blocks as in the main deck.)
 

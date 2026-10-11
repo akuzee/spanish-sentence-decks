@@ -1,7 +1,7 @@
 # Adjusting a deck to your level
 
-On AnkiWeb the sentences come as two decks, levels 1–8 and the "extra challenge sentences" (levels 9–10);
-everything below applies to both.
+On AnkiWeb the sentences come as two decks: the main one (vocabulary inside the 5,000 most frequent words) and
+the "extra challenge sentences" (C1+ vocabulary); everything below applies to both.
 
 Every note carries a `level::01` … `level::10` tag: the difficulty deciles of the whole sentence pool.
 Roughly, for a plain sentence of ordinary length:
