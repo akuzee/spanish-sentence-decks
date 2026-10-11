@@ -1,6 +1,6 @@
 # AnkiWeb postings (paste as-is)
 
-AnkiWeb descriptions are plain text; links show as text. One block per deck.
+Plain text; links show as text. One block per deck.
 
 ---
 
@@ -10,35 +10,22 @@ File: `decks/Ultimate top 20000 spanish sentences - best decks merged, customiza
 Title: `Ultimate top 20000 spanish sentences - best decks merged, customizable to your level`
 
 ```
-The best Spanish sentence decks on AnkiWeb, combined into one, sorted from easy to hard, and tagged so you can set it to your level in a minute.
+The best Spanish sentence decks on AnkiWeb (the two Tatoeba decks, Neri's Spanish Sentences), merged into one and sorted from easy to hard. Duplicates, fragments and junk removed; the beginner section trimmed so you move on when you should; every word inside the 5,000 most frequent (up to B2). 13,615 sentences, English translations, audio on 7,810 (native speakers where available).
 
-13,615 sentences with English translations: every usable sentence from the two Tatoeba decks, plus lines from Neri's Spanish Sentences wherever they add a word or structure Tatoeba lacks. De-duplicated, fragments and broken lines removed, the beginner end trimmed so you move on when you should. Every word is inside the 5,000 most frequent (up to B2); sentences that need rarer words are in the companion deck "… (extra 4,701 challenge sentences)". Audio on 7,810 sentences (57%): native recordings where they exist, a synthetic voice otherwise.
+CUSTOMIZE IT TO YOUR LEVEL
+Every card is tagged level::01 to level::10. Search a band in the browser (e.g. tag:level::01 OR tag:level::02) and delete it, or make it occasional reviews with Cards → Set Due Date → "90-180!". Rough guide: A2 delete 1–2 / review 3–4; B1 delete 1–4 / review 5–6; B2 delete 1–6 / review 7–8. Also tagged: grammar (gram::subj, gram::past, …), Spain-specific sentences (region::*), source and audio.
 
-Each sentence is scored for difficulty (how rare its hardest word is, plus grammar such as subjunctive or conditional), so the deck starts with "Es lo que es" and ends with the subjunctive and B2 vocabulary. Finish it and you have seen every common word in 5–12 sentences and every grammar pattern at every level; after that, real content beats more sentence drilling. At 20–50 new cards a day it is a year or two of practice; suspend the Translate cards (search card:Translate) to halve it.
+PAIRED WITH THE VOCAB DECK
+"Ultimate top 5000 spanish vocab - best decks merged, customizable to your level" uses the same frequency list. By sentence 1,000 you should know its first ~700 words; by 5,000, ~1,850; by 10,000, ~3,100.
 
-TWO CARDS PER SENTENCE
-• Read: Spanish → English. The hardest word is highlighted with its meaning.
-• Translate: English → the full Spanish sentence, with two optional hints (the sentence with the key word blanked, and the key word) for when a sentence is new to you.
+CARDS
+Read (Spanish → English, hardest word highlighted) and Translate (English → Spanish, with optional hints). Rarer vocabulary is in the companion deck "… (extra 4,701 challenge sentences)".
 
-SET IT TO YOUR LEVEL
-• Every card has a level::01–10 tag. In the browser, search a band (e.g. tag:level::01 OR tag:level::02), then delete it, or turn it into occasional reviews with Cards → Set Due Date → "90-180!". Suggested: A2 delete 1–2 / review 3–4; B1 delete 1–4 / review 5–6; B2 delete 1–6 / review 7–8.
-• Latin American Spanish: Spain-specific sentences (vosotros, Spain-only words) are tagged region::* — search tag:region::* and suspend them.
-• Grammar drills: tag:gram::subj, gram::cond, gram::perf, gram::past, gram::fut, gram::imper, gram::ger.
-• Audio on demand: deck options → "Don't play audio automatically".
+Level guide, how it was built, more versions, and a 78,000-sentence bank you can have an LLM pull extra practice from: https://github.com/akuzee/spanish-sentence-decks
 
-PAIR IT WITH THE VOCAB DECK
-"Ultimate top 5000 spanish vocab - best decks merged, customizable to your level" is sorted on the same frequency list, so you can pace them together: by sentence 500 know the first ~330 words · 1,000 → ~720 · 2,500 → ~1,400 · 5,000 → ~1,850 · 10,000 → ~3,100 · end → ~4,200.
+Buy me a coffee if it helped: https://buymeacoffee.com/akuzee
 
-NEED MORE AT YOUR LEVEL?
-The deck is one selection from a bank of 78,000 scored sentences. If you want more practice before moving up, or more of one thing (subjunctive, a word band, audio only), the bank is on GitHub with instructions you can paste to Claude or ChatGPT to build an add-on matched to what you struggle with.
-
-Level guide, method, bank and other versions: https://github.com/akuzee/spanish-sentence-decks
-
-SUPPORT
-If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.
-
-CREDITS
-Sentences: Tatoeba Project (CC BY 2.0 FR) via the decks "9000 Spanish sentences – difficulty sorted with native audio" and "spanish 7500 intermediate/advanced sentences"; Neri's Spanish Sentences Parts 1–3. Audio: Tatoeba user arh (CC BY-NC-ND 3.0). Thanks to all of them: this deck only re-sorts their work. Problems with a sentence? Open an issue on GitHub.
+Credits: sentences from the Tatoeba Project (CC BY 2.0 FR) via "9000 Spanish sentences – difficulty sorted with native audio" and "spanish 7500 intermediate/advanced sentences", and from Neri's Spanish Sentences 1–3; audio by Tatoeba user arh (CC BY-NC-ND 3.0).
 ```
 
 ---
@@ -49,17 +36,13 @@ File: `decks/Ultimate top 20000 spanish sentences - best decks merged, customiza
 Title: `Ultimate top 20000 spanish sentences - best decks merged, customizable to your level (extra 4,701 challenge sentences)`
 
 ```
-The C1+ companion to "Ultimate top 20000 spanish sentences - best decks merged, customizable to your level".
+The C1+ companion to "Ultimate top 20000 spanish sentences - best decks merged, customizable to your level": 4,701 sentences that use a word beyond the 5,000 most frequent. Same cards (Read, Translate with hints), same level::, gram:: and region:: tags, same sources. Audio on 2,581. Start it when the main deck's level 8 feels easy.
 
-4,701 sentences that need a word beyond the 5,000 most frequent, or two words beyond the 4,000 mark: rare vocabulary in otherwise natural sentences. Audio on 2,581 (native recordings where they exist, a synthetic voice otherwise). Same two cards (Read, Translate with hints), same tags (level::, gram::, region::), same sources and curation as the main deck. Start here when the main deck's level 8 feels easy.
+Level guide and more: https://github.com/akuzee/spanish-sentence-decks
 
-Set it to your level and pair it with the vocab deck exactly as described on the main deck's page. Level guide, method and other versions: https://github.com/akuzee/spanish-sentence-decks
+Buy me a coffee if it helped: https://buymeacoffee.com/akuzee
 
-SUPPORT
-If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.
-
-CREDITS
-Sentences: Tatoeba Project (CC BY 2.0 FR) via the decks "9000 Spanish sentences – difficulty sorted with native audio" and "spanish 7500 intermediate/advanced sentences"; Neri's Spanish Sentences Parts 1–3. Audio: Tatoeba user arh (CC BY-NC-ND 3.0). Thanks to all of them: this deck only re-sorts their work. Problems with a sentence? Open an issue on GitHub.
+Credits: sentences from the Tatoeba Project (CC BY 2.0 FR) via "9000 Spanish sentences – difficulty sorted with native audio" and "spanish 7500 intermediate/advanced sentences", and from Neri's Spanish Sentences 1–3; audio by Tatoeba user arh (CC BY-NC-ND 3.0).
 ```
 
 ---
@@ -70,31 +53,21 @@ File: `decks/Ultimate top 5000 spanish vocab - best decks merged, customizable t
 Title: `Ultimate top 5000 spanish vocab - best decks merged, customizable to your level`
 
 ```
-The two best "Top 5000" Spanish vocabulary decks on AnkiWeb, merged into one: the pictures from "Essential Spanish Vocabulary Top 5000" and the example sentences and natural-sounding audio from "New Spanish Top 5000 with Examples". 5,601 words, matched by headword (the two decks use different frequency lists, so about 600 words come from only one of them), ordered by frequency.
+The two best "Top 5000" Spanish vocabulary decks on AnkiWeb, merged: the pictures from "Essential Spanish Vocabulary Top 5000" plus the example sentences and natural-sounding audio from "New Spanish Top 5000 with Examples". 5,601 words in frequency order, two cards each (Spanish → English with audio; English → Spanish with picture), meaning, picture, audio and two example sentences on every word.
 
-TWO CARDS PER WORD
-• Spanish → English: word and audio on the front; meaning, picture and two example sentences (with translations) on the back.
-• English → Spanish: meaning and picture on the front; word, audio and examples on the back.
+CUSTOMIZE IT TO YOUR LEVEL
+Words are tagged by frequency band (rank::0001-0500 … rank::4501-5000) and cognates by cognate::strong / cognate::weak. Delete the bands below you, or make them occasional reviews with Cards → Set Due Date → "90-180!". Rough guide: A2 review ≤500; B1 delete ≤1000, review 1001–2000; B2 delete ≤2000, review 2001–3000.
 
-SET IT TO YOUR LEVEL
-• Words are tagged by frequency band (rank::0001-0500 … rank::4501-5000). Delete the bands below you, or turn them into occasional reviews with Cards → Set Due Date → "90-180!". Suggested: A2 review rank ≤500; B1 delete ≤1000, review 1001–2000; B2 delete ≤2000, review 2001–3000.
-• Cognates (words that look like their English translation) are tagged cognate::strong / cognate::weak. The Spanish → English card of a cognate is usually free; keep the English → Spanish card.
-• Part of speech: pos::nm, pos::nf, pos::v, pos::adj, …
+PAIRED WITH THE SENTENCE DECK
+"Ultimate top 20000 spanish sentences - best decks merged, customizable to your level" is sorted on the same list: knowing the first ~700 words gets you through its first 1,000 sentences; ~1,850 words → 5,000 sentences; ~3,100 → 10,000.
 
-PAIR IT WITH THE SENTENCE DECK
-"Ultimate top 20000 spanish sentences - best decks merged, customizable to your level" is sorted on the same list: when you know the first ~720 words you are ready for its first 1,000 sentences; ~1,850 words → 5,000 sentences; ~3,100 → 10,000; ~4,200 → the whole deck.
+Guide and details: https://github.com/akuzee/spanish-sentence-decks
 
-Guide and method: https://github.com/akuzee/spanish-sentence-decks
+Buy me a coffee if it helped: https://buymeacoffee.com/akuzee
 
-SUPPORT
-If this saved you some time, you can buy me a coffee: https://buymeacoffee.com/akuzee. Nothing is paywalled and nothing will be.
-
-CREDITS
-Built from the AnkiWeb decks "Essential Spanish Vocabulary Top 5000" and "New Spanish Top 5000 with Examples"; thanks to both authors. Word list and glosses follow Mark Davies' A Frequency Dictionary of Spanish (Routledge).
+Credits: built from the AnkiWeb decks "Essential Spanish Vocabulary Top 5000" and "New Spanish Top 5000 with Examples"; word list and glosses follow Mark Davies' A Frequency Dictionary of Spanish.
 ```
 
 ---
 
-## Not uploaded yet
-
-**Spanish Sentences – Macro (78k, everything)**: nothing filtered out; every distinct line from the five sources, sorted by difficulty, low-quality lines tagged quality::low. On GitHub Releases for now.
+Not uploaded yet: **Spanish Sentences – Macro** (everything, 78k lines, sorted by difficulty), on GitHub Releases.
