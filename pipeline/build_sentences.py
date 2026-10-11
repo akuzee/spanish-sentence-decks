@@ -73,6 +73,8 @@ def main():
     ap.add_argument("--no-gloss", action="store_true", help="omit the dictionary gloss of the target word")
     ap.add_argument("--vosotros-penalty", type=int, default=1000, help="how far vosotros sentences are pushed back in the order (score points; ~1000 = one level later, 3000 = to the end)")
     ap.add_argument("--audio", choices=["all", "native", "none"], default="all", help="which recordings to include: all, only the native (Tatoeba/arh) ones, or none")
+    ap.add_argument("--tts-max-level", type=int, default=10, help="with --audio all: include the synthetic (TTS) recordings only for sentences up to this level (1-10)")
+    ap.add_argument("--tts-bitrate", default="", help="with --audio all: re-encode the synthetic recordings to this MP3 bitrate, mono (e.g. 24k) to fit AnkiWeb's size limit; native recordings are never touched")
     ap.add_argument("--name", required=True, help="deck name"); ap.add_argument("--out", required=True); ap.add_argument("--report")
     ap.add_argument("--seed", type=int, default=2026)
     a = ap.parse_args(); random.seed(a.seed)
@@ -110,6 +112,28 @@ def main():
     core = sorted([r for r in studied if r["tier"] == "core"], key=lambda r: r["order"])
     rest = sorted([r for r in studied if r["tier"] != "core"], key=lambda r: r["order"])
     print(f"variant={a.variant} sources={a.sources} level={a.level}: {len(core)} core, {len(rest)} {'extended' if a.split_core else 'flat'}, {len(reviews)} reviews, dropped {len(rows) - len(studied) - len(reviews)}", file=sys.stderr)
+    # ---- synthetic recordings: optional level cap and re-encode (native recordings stay byte-identical)
+    tts_bytes = {}
+    if a.audio == "all" and a.tts_bitrate:
+        import concurrent.futures, subprocess, tempfile
+        need = []
+        for r in core + rest + reviews:
+            mm = re.search(r"\[sound:([^\]]+)\]", r["audio"])
+            if mm and r["src"] == "tatoeba_tts" and r["level"] <= a.tts_max_level: need.append(mm.group(1))
+        tmp = tempfile.mkdtemp(prefix="tts_")
+        def enc(fn):
+            data = pk["tatoeba_tts"].read_media(fn)
+            if not data: return fn, None
+            src = os.path.join(tmp, str(abs(hash(fn))) + ".mp3"); dst = src + ".out.mp3"; open(src, "wb").write(data)
+            ok = subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", src, "-ac", "1", "-ar", "22050", "-c:a", "libmp3lame", "-b:a", a.tts_bitrate, dst], capture_output=True).returncode == 0
+            out = open(dst, "rb").read() if ok else data
+            for f in (src, dst):
+                try: os.remove(f)
+                except OSError: pass
+            return fn, (out if len(out) < len(data) else data)
+        print(f"re-encoding {len(need)} synthetic recordings at {a.tts_bitrate} mono…", file=sys.stderr)
+        with concurrent.futures.ThreadPoolExecutor(8) as ex:
+            for fn, data in ex.map(enc, need): tts_bytes[fn] = data
     # ---- package
     template_db = next(iter(pk.values())).db_path
     w = PackageWriter(template_db, os.path.join(os.path.dirname(os.path.abspath(a.out)), "_build_" + os.path.basename(a.out).replace(".apkg", "")))
@@ -122,8 +146,9 @@ def main():
         gloss = RM[r["target_key"]][1] if (target and r["target_key"] and r["target_key"] in RM and not a.no_gloss) else ""
         m = re.search(r"\[sound:([^\]]+)\]", r["audio"]); au = ""
         if a.audio == "none" or (a.audio == "native" and r["src"] != "tatoeba_native"): m = None
+        if m and r["src"] == "tatoeba_tts" and r["level"] > a.tts_max_level: m = None
         if m:
-            data = pk[r["src"]].read_media(m.group(1)) if r["src"] in pk else None
+            data = tts_bytes.get(m.group(1)) or (pk[r["src"]].read_media(m.group(1)) if r["src"] in pk else None)
             if data: w.media[m.group(1)] = data; au = "[sound:%s]" % m.group(1); naudio += 1
         feats = [FEAT_LABEL[f] for f in r["feats"].split() if f in FEAT_LABEL]
         tags = ["spanish_sentences", "tier::" + r["tier"], "level::%02d" % r["level"], "src::" + r["src"], "audio::" + ("yes" if au else "no")]
@@ -151,7 +176,8 @@ def main():
             + "Latin American learners: Spain-specific sentences are tagged region::vosotros / region::spain; search tag:region::* and suspend them. "
             "Tags: level::01-10 (difficulty deciles), gram::*, src::*, audio::*"
             + (", quality::low + drop::* for lines that failed the quality filter" if a.variant == "macro" else "") + ". "
-            f"Cards: <b>Read</b> (Spanish &rarr; English) and <b>Translate</b> (English &rarr; Spanish with optional hints). Audio on {naudio} sentences; "
+            f"Cards: <b>Read</b> (Spanish &rarr; English) and <b>Translate</b> (English &rarr; Spanish with optional hints). Audio on {naudio} sentences"
+            + (f" (native recordings everywhere they exist; synthetic recordings up to level {a.tts_max_level}" + (f", re-encoded to {a.tts_bitrate} mono" if a.tts_bitrate else "") + ")" if a.audio == "all" and (a.tts_max_level < 10 or a.tts_bitrate) else "") + "; "
             "enable 'Don't play audio automatically' in the deck options if you only want it on demand. "
             "Sentences: Tatoeba (CC BY 2.0 FR); native audio by Tatoeba user arh (CC BY-NC-ND 3.0). See the project README for full credits.")
     w.add_deck(DID_P, a.name, desc)

@@ -121,8 +121,13 @@ artificially 400 days old. Import within a few days of building, or rebuild.
 Anki writes media into an .apkg uncompressed. Our writers deflate every entry instead, which is lossless and
 imports normally, and happens to matter a lot for synthetic speech: the Azure recordings in the vocabulary deck
 shrink to ~52% (silence padding compresses), real recordings barely change. That is the difference between 154 MB
-and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any existing package;
-`pipeline/shrink_audio.py` is the lossy fallback (re-encode MP3s with ffmpeg) if a deck is still too big.
+and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any existing package.
+
+The sentence decks' native recordings are real speech and barely compress, so the AnkiWeb builds use two more
+knobs in `build_sentences.py`: `--tts-max-level 8` drops the synthetic recordings for the hardest two levels (they
+are the longest sentences and hold 45% of the synthetic audio by size) and `--tts-bitrate 24k` re-encodes the rest
+to mono 24 kbps (the originals are 32 kbps). Native recordings are never re-encoded (also a condition of their
+CC BY-NC-ND license). `pipeline/shrink_audio.py` is the blunt fallback that re-encodes every MP3 in a package.
 
 ## 8. Known limitations
 - About 8% of sentences contain a content word the lemmatiser could not map (mostly genuinely rare words), which
