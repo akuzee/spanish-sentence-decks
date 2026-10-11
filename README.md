@@ -24,8 +24,8 @@ with two optional hints you can click when you are new to it).
 | B1 · Latin American · Core/Extended | 22,467 | A ready-made preset: easy levels dropped, 1,000 "probably known" sentences as long-interval reviews, best 2 sentences per target word in a *Core* subdeck | 9,620 | Releases (142 MB) |
 
 All decks share the same note type and the same `level::01` … `level::10` tags, so you can switch or merge later.
-AnkiWeb has a file-size limit of about 150 MB; all three AnkiWeb files are under it with every recording at its
-original quality. The one-file versions are on
+AnkiWeb's file-size limit is 250 MB; all three AnkiWeb files are well under it with every recording at its original
+quality. The one-file versions are on
 [Releases](https://github.com/akuzee/spanish-sentence-decks/releases). Everything rebuilds locally with `make decks`.
 
 **Download:** AnkiWeb: *(links added after upload)* · GitHub: [Releases](https://github.com/akuzee/spanish-sentence-decks/releases)

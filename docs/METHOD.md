@@ -154,8 +154,8 @@ shrink to ~52% (silence padding compresses), real recordings barely change. That
 and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any existing package.
 
 The sentence decks' native recordings are real speech and barely compress, and the synthetic clips are already
-lean 32 kbps files, so the 54,754-sentence deck with all its audio (192 MB) cannot be squeezed under AnkiWeb's limit
-without audible loss. The AnkiWeb release therefore splits the deck by vocabulary (`--c1 exclude` / `--c1 only`): the curated pre-C1
+lean 32 kbps files, so the 54,754-sentence deck with all its audio (192 MB) was first built against an assumed 150 MB AnkiWeb limit
+(the real limit is 250 MB); the split below was kept because it is the better deck, not for size. The AnkiWeb release therefore splits the deck by vocabulary (`--c1 exclude` / `--c1 only`): the curated pre-C1
 deck (110 MB) and the C1+ deck (40 MB), each with every recording untouched. Native recordings are never
 re-encoded in any build (also a condition of their CC BY-NC-ND license). For other size targets the builder also has
 `--tts-max-level` (drop synthetic clips above a level) and `--tts-bitrate` (re-encode them, average-bitrate mono),
