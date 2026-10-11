@@ -3,8 +3,8 @@ PY ?= python3
 PIPE = pipeline
 DATA = data
 DECKS = decks
-VOCAB_OLD ?= ~/Downloads/Spanish_5000_Words_Merged.apkg
-VOCAB_NEW ?= ~/Downloads/New_Spanish_5000_Words_Merged.apkg
+VOCAB_OLD ?= ~/Downloads/Ultimate_Spanish_Vocab_5000.apkg
+VOCAB_NEW ?= ~/Downloads/New_Ultimate_Spanish_Vocab_5000.apkg
 
 .PHONY: all vocab vocab-public pool rankmap score decks verify clean
 all: decks
@@ -15,7 +15,7 @@ $(DATA)/vocab_words.tsv:
 	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --out ../$(DECKS)/Spanish_Top_5000_Merged.apkg --report ../$(DATA)/vocab_words.tsv --work ../work
 
 vocab-public: $(DATA)/vocab_words.tsv
-	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --mode public --out ../$(DECKS)/Spanish_5000_Words_Merged.apkg --report ../$(DATA)/vocab_words_public.tsv --work ../work
+	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --mode public --out ../$(DECKS)/Ultimate_Spanish_Vocab_5000.apkg --report ../$(DATA)/vocab_words_public.tsv --work ../work
 	# if a package still exceeds AnkiWeb's limit: shrink_audio.py re-encodes the MP3s (lossy); repack.py only re-compresses the zip (lossless)
 
 rankmap: $(DATA)/rankmap.json
@@ -35,8 +35,8 @@ BUILD = cd $(PIPE) && $(PY) build_sentences.py --scored ../$(DATA)/scored.tsv --
 decks: $(DATA)/scored.tsv
 	mkdir -p $(DECKS)
 	# AnkiWeb uploads (<150 MB each): the main deck is split in two so every recording stays at its original quality
-	$(BUILD) --variant quality --audio all --level-max 8 --name "Spanish Sentences::1 Levels 1–8"               --out ../$(DECKS)/Spanish_Sentences_Levels_1-8.apkg   --report ../$(DATA)/report_levels_1-8.tsv
-	$(BUILD) --variant quality --audio all --level-min 9 --name "Spanish Sentences::2 Advanced (levels 9–10)"  --out ../$(DECKS)/Spanish_Sentences_Advanced_9-10.apkg --report ../$(DATA)/report_levels_9-10.tsv
+	$(BUILD) --variant quality --audio all --level-max 8 --name "Ultimate Top 43,803 Spanish Sentences – Best Decks Merged::Levels 1–8" --out ../$(DECKS)/Ultimate_Spanish_Sentences_Levels_1-8.apkg   --report ../$(DATA)/report_levels_1-8.tsv
+	$(BUILD) --variant quality --audio all --level-min 9 --name "Ultimate Top 43,803 Spanish Sentences – Best Decks Merged::Extra 10,951 challenge sentences (levels 9–10)" --out ../$(DECKS)/Ultimate_Spanish_Sentences_Challenge_9-10.apkg --report ../$(DATA)/report_levels_9-10.tsv
 	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)"     --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
 	# GitHub Releases only (no size limit): one-file versions with all audio
 	$(BUILD) --variant quality --audio all --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg --report ../$(DATA)/report_quality.tsv

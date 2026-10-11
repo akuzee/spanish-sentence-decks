@@ -1,7 +1,7 @@
 # Adjusting a deck to your level
 
-On AnkiWeb the main deck comes in two parts, levels 1–8 and levels 9–10 ("Advanced"); they install as two sections
-of one deck, and everything below applies to both.
+On AnkiWeb the sentence deck comes in two parts, levels 1–8 and the "extra challenge sentences" (levels 9–10); they
+install as two sections of one deck, and everything below applies to both.
 
 Every note carries a `level::01` … `level::10` tag: the difficulty deciles of the whole sentence pool.
 Roughly, for a plain sentence of ordinary length:
@@ -90,7 +90,7 @@ select all and use *Notes → Delete*, *Cards → Toggle Suspend*, *Cards → Se
 
 Deleted something by mistake? Re-import the same .apkg: Anki adds back the missing notes and leaves the rest alone.
 
-## The vocabulary deck (Spanish 5000 Words – merged)
+## The vocabulary deck (Ultimate Top 5000 Spanish Vocab – Best Decks Merged)
 
 The merged vocabulary deck uses the same idea with frequency bands instead of levels: tags `rank::0001-0500` …
 `rank::4501-5000`, plus `cognate::strong` / `cognate::weak` for words that look like their English translation,
