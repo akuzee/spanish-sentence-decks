@@ -8,3 +8,4 @@ __pycache__/
 venv/
 sources.json
 work_pipeline.log
+personal/

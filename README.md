@@ -12,16 +12,20 @@ with two optional hints you can click when you are new to it).
 
 ## Pick a deck
 
-| deck | sentences | what it is | for whom |
-|---|---|---|---|
-| **Tatoeba only, Latin American cut** | 13,191 | Only the two Tatoeba-based decks (cleanest text and licensing, 100% audio), minus Spain-specific sentences | the safe default |
-| **Latin American cut** | 54,097 | Everything that passes the quality filter, minus sentences with *vosotros* or Spain-only vocabulary | you want volume and colloquial subtitle lines too |
-| **Quality cut** | 54,754 | Same, keeping the Spain-flavoured sentences | learners of European Spanish |
-| **Macro** | 78,016 | Every distinct line from all five sources, including 2–3 word fragments and odd lines, sorted by difficulty, nothing removed (low-quality lines are just tagged) | you want to do your own cutting |
-| **B1 · Latin American · Core/Extended** | 22,461 | A ready-made preset: easy levels dropped, 1,000 "probably known" sentences as long-interval reviews, best 2 sentences per target word in a *Core* subdeck | roughly B1 learners |
+| deck | sentences | audio | what it is | where |
+|---|---|---|---|---|
+| **Tatoeba only · Latin American cut · native audio** | 13,191 | 6,041 native recordings | The two Tatoeba-based decks, minus Spain-specific sentences; synthetic audio left out. Cleanest licensing. 95 MB. | **AnkiWeb** (link below) and Releases |
+| Tatoeba only · Latin American cut | 13,191 | all 13,191 (native + TTS) | Same sentences, with the 7500 deck's synthetic recordings too. 200 MB. | Releases |
+| Latin American cut | 54,097 | 13,191 | Everything that passes the quality filter, minus *vosotros* / Spain-only vocabulary; adds ~41,000 colloquial subtitle lines | build locally (`make decks`) until the subtitle material is cleared |
+| Quality cut | 54,754 | 13,556 | Same, keeping the Spain-flavoured sentences | build locally |
+| Macro | 78,016 | 17,262 | Every distinct line from all five sources, including 2–3-word fragments and odd lines, sorted by difficulty, nothing removed (low-quality lines are only tagged) | build locally |
+| B1 · Latin American · Core/Extended | 22,467 | 9,610 | A ready-made preset: easy levels dropped, 1,000 "probably known" sentences as long-interval reviews, best 2 sentences per target word in a *Core* subdeck | build locally |
 
 All decks share the same note type and the same `level::01` … `level::10` tags, so you can switch or merge later.
-Which files are actually published on AnkiWeb depends on licensing; see [docs/SOURCES.md](docs/SOURCES.md).
+Only the Tatoeba-only decks are published, because the subtitle-based sources have no stated license; see
+[docs/SOURCES.md](docs/SOURCES.md). Everything else builds locally in about ten minutes.
+
+**Download:** AnkiWeb: *(link added after upload)* · GitHub: [Releases](https://github.com/akuzee/spanish-sentence-decks/releases)
 
 ## Adjust it to your level
 

@@ -7,6 +7,7 @@ Sources       --sources all | tatoeba   (tatoeba = only the two Tatoeba-derived 
 Level         --level none       every card new, in difficulty order (use the level:: tags to adjust yourself)
               --level A2|B1|B2|C1  sentences below the level are dropped, the band just under it becomes
                                  long-interval reviews (capped by --review-cap), the rest are new cards
+Audio         --audio all|native|none   which recordings to pack (native = only the CC-licensed Tatoeba recordings)
 Structure     --split-core N     subdeck "1 Core" = best N sentences per target word, "2 Extended" = the rest
                                  (0 = one flat deck)
 Cards: Read (Spanish -> English) and Translate (English -> Spanish, with optional hints).
@@ -70,6 +71,7 @@ def main():
     ap.add_argument("--review-cap", type=int, default=1000, help="max sentences kept as reviews from the band under --level")
     ap.add_argument("--split-core", type=int, default=0, help="N best sentences per target word go to '1 Core'; 0 = flat deck")
     ap.add_argument("--no-gloss", action="store_true", help="omit the dictionary gloss of the target word")
+    ap.add_argument("--audio", choices=["all", "native", "none"], default="all", help="which recordings to include: all, only the native (Tatoeba/arh) ones, or none")
     ap.add_argument("--name", required=True, help="deck name"); ap.add_argument("--out", required=True); ap.add_argument("--report")
     ap.add_argument("--seed", type=int, default=2026)
     a = ap.parse_args(); random.seed(a.seed)
@@ -118,6 +120,7 @@ def main():
         target = r["target"] if r["max_rank"] > 1000 else ""
         gloss = RM[r["target_key"]][1] if (target and r["target_key"] and r["target_key"] in RM and not a.no_gloss) else ""
         m = re.search(r"\[sound:([^\]]+)\]", r["audio"]); au = ""
+        if a.audio == "none" or (a.audio == "native" and r["src"] != "tatoeba_native"): m = None
         if m:
             data = pk[r["src"]].read_media(m.group(1)) if r["src"] in pk else None
             if data: w.media[m.group(1)] = data; au = "[sound:%s]" % m.group(1); naudio += 1

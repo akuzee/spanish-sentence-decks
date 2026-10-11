@@ -34,6 +34,7 @@ decks: $(DATA)/scored.tsv
 	$(BUILD) --variant quality --name "Spanish Sentences – Quality cut"                      --out ../$(DECKS)/Spanish_Sentences_Quality.apkg --report ../$(DATA)/report_quality.tsv
 	$(BUILD) --variant latam   --name "Spanish Sentences – Latin American cut"               --out ../$(DECKS)/Spanish_Sentences_LatAm.apkg --report ../$(DATA)/report_latam.tsv
 	$(BUILD) --variant latam --sources tatoeba --name "Spanish Sentences – Tatoeba only (LatAm cut)" --out ../$(DECKS)/Spanish_Sentences_Tatoeba_LatAm.apkg
+	$(BUILD) --variant latam --sources tatoeba --audio native --name "Spanish Sentences – Tatoeba, Latin American cut, native audio" --out ../$(DECKS)/Spanish_Sentences_Tatoeba_LatAm_NativeAudio.apkg --report ../$(DATA)/report_tatoeba_latam.tsv
 	$(BUILD) --variant latam --level B1 --split-core 2 --name "Spanish Sentences – B1 LatAm (Core/Extended)" --out ../$(DECKS)/Spanish_Sentences_B1_LatAm.apkg --report ../$(DATA)/report_b1_latam.tsv
 
 verify:

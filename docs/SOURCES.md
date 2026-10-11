@@ -33,6 +33,12 @@ The recordings here are unmodified.
 - AnkiWeb removes copyrighted material on request and the uploader carries the responsibility, so when in doubt,
   leave it out.
 
+### Decision for the first release (2026-10-11)
+Published on AnkiWeb: the **Tatoeba-only** decks (text CC BY 2.0 FR, native audio CC BY-NC-ND 3.0, both deck
+authors credited; the 9000-deck author explicitly allowed re-sharing). The variants that contain subtitle lines are
+**not** uploaded until Neri has answered the permission request in `NERI_PERMISSION_REQUEST.md`; anyone can
+build them locally with `make decks`. The merged vocabulary deck is not published.
+
 ## Frequency ranks (how difficulty is measured)
 
 Sentence difficulty is driven by the frequency rank of each word's lemma. The ranks come from the two
