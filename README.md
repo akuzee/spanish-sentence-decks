@@ -28,6 +28,14 @@ on [Releases](https://github.com/akuzee/spanish-sentence-decks/releases). Everyt
 
 **Download:** AnkiWeb: *(links added after upload)* · GitHub: [Releases](https://github.com/akuzee/spanish-sentence-decks/releases)
 
+## The vocabulary deck
+
+The same repository builds **Spanish Top 5000 Vocabulary (merged)**: the pictures of *Essential Spanish Vocabulary
+Top 5000* joined with the example sentences and audio of *New Spanish Top 5000 with Examples*, 5,601 words matched
+by headword and ordered by frequency, with `rank::` band, `cognate::` and `pos::` tags for cutting to your level
+(table in [docs/LEVELS.md](docs/LEVELS.md)). Its frequency ranks are also what the sentence scoring uses.
+AnkiWeb file (audio re-encoded, ~100 MB) and full-audio file (154 MB) are on Releases.
+
 ## Adjust it to your level
 
 Each sentence has a level tag (1 = easiest 10%, 10 = hardest 10%). In Anki's browser:

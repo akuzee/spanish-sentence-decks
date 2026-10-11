@@ -15,6 +15,7 @@ _ap.add_argument("--old", required=True, help="Essential Spanish Vocabulary Top 
 _ap.add_argument("--new", required=True, help="New Spanish Top 5000 with Examples .apkg")
 _ap.add_argument("--out", required=True, help="merged .apkg"); _ap.add_argument("--report", required=True, help="per-word TSV (used by rankmap.py)")
 _ap.add_argument("--work", default="work")
+_ap.add_argument("--mode", choices=["tiered", "public"], default="tiered", help="tiered = B1 preset with review cards; public = every card new, in frequency order, tags only")
 _a = _ap.parse_args()
 _pk_old = Apkg(os.path.expanduser(_a.old), f"{_a.work}/vocab_old"); _pk_new = Apkg(os.path.expanduser(_a.new), f"{_a.work}/vocab_new")
 OLD_DB, OLD_APKG, NEW_DB, NEW_APKG, OUT_APKG, REPORT = _pk_old.db_path, _pk_old.path, _pk_new.db_path, _pk_new.path, _a.out, _a.report
@@ -188,6 +189,7 @@ for m in merged:
     elif c >= 0.85: tier, fwd, rev = "cognate", U(120, 240), 0
     elif c >= 0.72: tier, fwd, rev = "cognate-weak", U(60, 150), 0
     else: tier, fwd, rev = "study", 0, 0
+    if _a.mode == "public": fwd = rev = 0
     m['tier'], m['fwd'], m['rev'] = tier, fwd, rev
     tier_count[tier] += 1
 print("tiers:", dict(tier_count))
@@ -261,7 +263,20 @@ DESC = ("Merged from 'Essential Spanish Vocabulary Top 5000' (pictures, 2006 Dav
         "tier::cognate / tier::cognate-weak (strong / weaker English cognate: the Spanish&rarr;English card starts as a 2&ndash;8 month review, the English&rarr;Spanish card is a normal new card), tier::study (new cards).<br>"
         "Abbreviations: adj adjective, adv adverb, art article, conj conjunction, interj interjection, nc common noun, nf feminine noun, nf (el) feminine noun taking 'el', "
         "nm masculine noun, nm/f masc/fem noun, nmf noun with masc/fem meanings, num number, prep preposition, pron pronoun, v verb.") % len(merged)
-deck.update(id=DID, name="Spanish Top 5000 (merged)", mod=now, usn=-1, desc=DESC, conf=1, newToday=[0,0], revToday=[0,0], lrnToday=[0,0], timeToday=[0,0])
+if _a.mode == "public":
+    DESC = ("The two 'Top 5000' Spanish vocabulary decks merged into one: pictures from 'Essential Spanish Vocabulary Top 5000', example sentences and audio from "
+            "'New Spanish Top 5000 with Examples', matched by headword (%d words; the two decks use different frequency lists, so 601 words come from only one of them). "
+            "Cards: Spanish&rarr;English and English&rarr;Spanish. Ordered by frequency rank.<br><br>"
+            "<b>Start at your level</b>: words are tagged by frequency band (rank::0001-0500 &hellip; rank::4501-5000) and English cognates by cognate::strong / cognate::weak. "
+            "Search a band in the browser and delete it, or make it occasional reviews with Cards &rarr; Set Due Date &rarr; 90-180! &nbsp;Suggested: A2 review rank &le;500; "
+            "B1 delete &le;1000, review 1001&ndash;2000 and strong cognates; B2 delete &le;2000, review 2001&ndash;3000.<br>"
+            "Abbreviations: adj adjective, adv adverb, art article, conj conjunction, interj interjection, nc common noun, nf feminine noun, nf (el) feminine noun taking 'el', "
+            "nm masculine noun, nm/f masc/fem noun, nmf noun with masc/fem meanings, num number, prep preposition, pron pronoun, v verb.<br>"
+            "Word list and glosses follow Mark Davies' <i>A Frequency Dictionary of Spanish</i>. Method and sources: github.com/akuzee/spanish-sentence-decks") % len(merged)
+    DECK_NAME = "Spanish Top 5000 Vocabulary (merged)"
+else:
+    DECK_NAME = "Spanish Top 5000 (merged)"
+deck.update(id=DID, name=DECK_NAME, mod=now, usn=-1, desc=DESC, conf=1, newToday=[0,0], revToday=[0,0], lrnToday=[0,0], timeToday=[0,0])
 decks = {"1": default_deck, str(DID): deck}
 conf.update(curModel=str(MID), curDeck=DID, activeDecks=[DID], nextPos=1)
 # collection creation = start of today (local) so review 'due' == days from now on import
@@ -296,7 +311,7 @@ nid = now_ms + 10; cid = now_ms + 1_000_000
 new_pos = 0
 tag_summary = collections.Counter()
 for m in merged:
-    tags = ["spanish5000", band_tag(m['rank']), "pos::" + pos_tag(m['pos']), "tier::" + m['tier'], "src::" + m['src']]
+    tags = ["spanish5000", band_tag(m['rank']), "pos::" + pos_tag(m['pos']), "src::" + m['src']] + ([] if _a.mode == "public" else ["tier::" + m['tier']])
     if m['cog'] >= 0.85: tags.append("cognate::strong")
     elif m['cog'] >= 0.72: tags.append("cognate::weak")
     for t in tags: tag_summary[t] += 1

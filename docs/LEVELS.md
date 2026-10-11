@@ -63,6 +63,49 @@ the missing ones).
 Example: Latin American learner who wants the subjunctive drilled first:
 `tag:gram::subj -tag:region::vosotros -tag:region::spain` → select all → Cards → Reposition → start 1.
 
+## Filtering cookbook
+
+All of these are Browse-window searches; combine them with spaces (AND), `OR`, and `-` (NOT). After searching,
+select all and use *Notes → Delete*, *Cards → Toggle Suspend*, *Cards → Set Due Date*, or *Cards → Reposition*.
+
+| I want to… | search |
+|---|---|
+| only sentences with audio | `tag:audio::yes` |
+| drop everything without audio | `tag:audio::no` → delete or suspend |
+| only Tatoeba sentences (no subtitle lines) | `tag:src::tatoeba_native OR tag:src::tatoeba_tts` (invert with `-`) |
+| only the subtitle lines (colloquial dialogue) | `tag:src::neri*` |
+| drop Spain-specific sentences | `tag:region::*` → suspend |
+| drill the subjunctive first | `tag:gram::subj` → Cards → Reposition → start 0 |
+| skip the imperative / commands | `tag:gram::imper` → suspend |
+| short sentences only | `Words:4 OR Words:5 OR Words:6` (the *Words* field holds the word count) |
+| long sentences only | `Words:1*` (10–16 words) |
+| sentences whose key word is beyond the 5,000 list | `"Target Rank:"` (empty field) `tag:level::10` |
+| only the Read cards (no translation practice) | `card:Translate` → suspend (or remove the template under Tools → Manage Note Types → Cards) |
+| only the Translate cards | `card:Read` → suspend |
+| sentences that mention a word | `Spanish:*palabra*` or `Target:palabra` |
+| the fragments the quality filter would have removed (Macro deck only) | `tag:quality::low` → delete |
+
+Deleted something by mistake? Re-import the same .apkg: Anki adds back the missing notes and leaves the rest alone.
+
+## The vocabulary deck (Spanish Top 5000)
+
+The merged vocabulary deck uses the same idea with frequency bands instead of levels: tags `rank::0001-0500` …
+`rank::4501-5000`, plus `cognate::strong` / `cognate::weak` for words that look like their English translation,
+and `pos::nm`, `pos::v`, … for part of speech.
+
+| you are | delete | set as reviews (`90-180!`) | study as new |
+|---|---|---|---|
+| A1 | – | – | everything |
+| A2 | – | rank 1–500 | 501+ |
+| B1 | rank 1–1000 | 1001–2000, and strong cognates above 2000 | the rest |
+| B2 | rank 1–2000 | 2001–3000, and cognates above 3000 | the rest |
+| C1 | rank 1–3000 | 3001–4000 | 4001+ |
+
+Each card direction can be treated separately: `card:Reverse` (English → Spanish) is the harder one, so a common
+choice is to delete a band's Forward cards but keep its Reverse cards as reviews. Cognates: the Spanish → English
+card is usually free, the English → Spanish card (gender, spelling, false friends like *disgusto*) is not, so
+`tag:cognate::strong card:Forward` → reviews is a safe cut; leave `card:Reverse` as new.
+
 ## Building your own preset instead
 `python pipeline/build_sentences.py --level B2 --review-cap 500 --variant latam --split-core 2 …` does all of
 the above at build time (see `docs/METHOD.md`).

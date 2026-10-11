@@ -46,10 +46,11 @@ Sentence difficulty is driven by the frequency rank of each word's lemma. The ra
 `pipeline/vocab_merge.py`. Both decks reproduce Mark Davies' *A Frequency Dictionary of Spanish* (Routledge,
 2006/2018): headwords, ranks and glosses are the dictionary's. Because of that:
 
-- the merged vocabulary deck is **not** part of the public release (build it locally if you own the source decks);
-- the word → rank table (`data/rankmap.json`) is not committed either;
-- the public sentence decks carry only a per-sentence *Target Rank* number; the short dictionary gloss of the
-  target word can be left out of a build with `--no-gloss`.
+- the merged vocabulary deck is published with credit (see the decision above); it reproduces the dictionary's
+  headwords, ranks and short glosses, as the two source decks already did for years;
+- the word → rank table (`data/rankmap.json`) is not committed (rebuild it with `make rankmap`);
+- the sentence decks carry a per-sentence *Target Rank* number and the target word's short gloss; the gloss can be
+  left out of a build with `--no-gloss`.
 
 ## Tools
 spaCy `es_core_news_md` (MIT model license), simplemma (MIT), Anki (AGPL; used only to verify the packages).

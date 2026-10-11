@@ -44,3 +44,34 @@ quality::low so you can cut them yourself. Link to GitHub for the rest.
 
 **Spanish Sentences – Latin American cut (54k)**: the main deck with the 657 Spain-specific sentences removed
 instead of tagged. Note the native audio is still a speaker from Spain.
+
+---
+
+# Vocabulary deck
+
+Deck title: **Spanish Top 5000 Vocabulary – pictures, audio, example sentences (merged)**
+
+The two best "Top 5000" Spanish vocabulary decks on AnkiWeb, merged into one: the pictures from *Essential
+Spanish Vocabulary Top 5000* and the example sentences and natural-sounding audio from *New Spanish Top 5000
+with Examples*. 5,601 words, matched by headword (the two decks use different frequency lists, so about 600 words
+come from only one of them), ordered by frequency.
+
+TWO CARDS PER WORD
+• Spanish → English: word and audio on the front; meaning, picture and two example sentences (with translations)
+  on the back.
+• English → Spanish: meaning and picture on the front; word, audio and examples on the back.
+
+MAKE IT YOURS
+• Start at your level: words are tagged by frequency band (rank::0001-0500 … rank::4501-5000). Delete the bands
+  below you, or turn them into occasional reviews with Cards → Set Due Date → "90-180!". Suggested: A2 review
+  rank ≤500; B1 delete ≤1000, review 1001–2000; B2 delete ≤2000, review 2001–3000.
+• Cognates (words that look like their English translation) are tagged cognate::strong / cognate::weak. The
+  Spanish → English card of a cognate is usually free; keep the English → Spanish card.
+• Part of speech tags: pos::nm, pos::nf, pos::v, pos::adj, …
+
+Guide and method: https://github.com/akuzee/spanish-sentence-decks (docs/LEVELS.md)
+
+CREDITS
+Built from the AnkiWeb decks "Essential Spanish Vocabulary Top 5000" and "New Spanish Top 5000 with Examples";
+thanks to both authors. Word list and glosses follow Mark Davies' A Frequency Dictionary of Spanish (Routledge).
+Audio was re-encoded to fit AnkiWeb's size limit; a full-quality version is on GitHub.

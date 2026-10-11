@@ -6,13 +6,17 @@ DECKS = decks
 VOCAB_OLD ?= ~/Downloads/Spanish_Top_5000_Vocabulary.apkg
 VOCAB_NEW ?= ~/Downloads/New_Spanish_Top_5000_Vocabulary.apkg
 
-.PHONY: all vocab pool rankmap score decks verify clean
+.PHONY: all vocab vocab-public pool rankmap score decks verify clean
 all: decks
 
 vocab: $(DATA)/vocab_words.tsv
 $(DATA)/vocab_words.tsv:
 	mkdir -p $(DATA) $(DECKS)
 	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --out ../$(DECKS)/Spanish_Top_5000_Merged.apkg --report ../$(DATA)/vocab_words.tsv --work ../work
+
+vocab-public: $(DATA)/vocab_words.tsv
+	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --mode public --out ../$(DECKS)/Spanish_Top_5000_Vocabulary_FullAudio.apkg --report ../$(DATA)/vocab_words_public.tsv --work ../work
+	cd $(PIPE) && $(PY) shrink_audio.py ../$(DECKS)/Spanish_Top_5000_Vocabulary_FullAudio.apkg --out ../$(DECKS)/Spanish_Top_5000_Vocabulary.apkg --bitrate 40k
 
 rankmap: $(DATA)/rankmap.json
 $(DATA)/rankmap.json: $(DATA)/vocab_words.tsv
