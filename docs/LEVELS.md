@@ -66,6 +66,22 @@ the missing ones).
 Example: Latin American learner who wants the subjunctive drilled first:
 `tag:gram::subj -tag:region::vosotros -tag:region::spain` → select all → Cards → Reposition → start 1.
 
+## Pacing the sentence deck against the vocab deck
+
+| when you reach sentence… | you should know roughly the first… words of the vocab deck |
+|---|---|
+| 500 | 330 (vocab card ~650) |
+| 1,000 | 720 (card ~1,450) |
+| 2,500 | 1,400 (card ~2,750) |
+| 5,000 | 1,850 (card ~3,700) |
+| 7,500 | 2,350 (card ~4,700) |
+| 10,000 | 3,100 (card ~6,200) |
+| 13,615 (end) | 4,200 (card ~8,400) |
+
+(90th percentile of the hardest word in the sentences up to that point; the vocab deck has two cards per word.)
+
+Need more sentences at a level, or for one grammar point? See [ASK_AN_LLM.md](ASK_AN_LLM.md).
+
 ## Filtering cookbook
 
 All of these are Browse-window searches; combine them with spaces (AND), `OR`, and `-` (NOT). After searching,
@@ -90,7 +106,7 @@ select all and use *Notes → Delete*, *Cards → Toggle Suspend*, *Cards → Se
 
 Deleted something by mistake? Re-import the same .apkg: Anki adds back the missing notes and leaves the rest alone.
 
-## The vocabulary deck (Ultimate top 5000 spanish vocab - best decks merged)
+## The vocabulary deck (Ultimate top 5000 spanish vocab - best decks merged, customizable to your level)
 
 The merged vocabulary deck uses the same idea with frequency bands instead of levels: tags `rank::0001-0500` …
 `rank::4501-5000`, plus `cognate::strong` / `cognate::weak` for words that look like their English translation,

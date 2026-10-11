@@ -1,4 +1,4 @@
-# Spanish sentence decks, sorted by difficulty
+# Spanish sentence decks, sorted by difficulty and customizable to your level
 
 Five popular Anki sentence decks for Spanish, pooled, cleaned, de-duplicated and **re-sorted by a single
 difficulty score**, so you can start wherever your level is and have the sentences get harder as you go.
@@ -15,8 +15,8 @@ with two optional hints you can click when you are new to it).
 
 | deck | sentences | what it is | audio | where |
 |---|---|---|---|---|
-| **Ultimate top 20000 spanish sentences - best decks merged** (main) | 21,705 | Quality sentences with pre-C1 vocabulary (inside the 5,000-word list), near-repetitions and subtitle lines with character names removed. Sentences made only of top-1,000 words are kept only while they add a new word or grammar example (2,509 of 26,945), so the easy end doesn't drag on. Spain-specific sentences are tagged, not removed. | 7,810 (all original quality) | **AnkiWeb**, Releases (111 MB) |
-| **Ultimate top 20000 spanish sentences - best decks merged (extra 4,701 challenge sentences)** | 4,701 | Sentences that need C1 vocabulary: a word beyond the 5,000 list, or two words beyond rank 4,000. Same curation. | 2,581 | **AnkiWeb**, Releases (40 MB) |
+| **Ultimate top 20000 spanish sentences - best decks merged, customizable to your level** (main) | 13,615 | Pre-C1 vocabulary (inside the 5,000-word list), near-repetitions and subtitle lines with character names removed. All 7,810 Tatoeba sentences, plus 5,805 subtitle lines admitted only where they add a word or grammar example Tatoeba lacks (5 / 8 / 12 examples per word by rarity). Spain-specific sentences are tagged, not removed. | 7,810 (57%, original quality) | **AnkiWeb**, Releases (110 MB) |
+| **Ultimate top 20000 spanish sentences - best decks merged, customizable to your level (extra 4,701 challenge sentences)** | 4,701 | Sentences that need C1 vocabulary: a word beyond the 5,000 list, or two words beyond rank 4,000. Same curation. | 2,581 | **AnkiWeb**, Releases (40 MB) |
 | Macro | 78,016 | Every distinct line from all five sources, including 2–3-word fragments and odd lines, nothing removed (low-quality lines are tagged `quality::low`), in difficulty order | 9,262 native | Releases (131 MB); AnkiWeb later |
 | One-file main deck | 54,754 | Levels 1–10 in one file, uncurated, all audio | 13,556 | Releases (192 MB) |
 | Latin American cut | 54,097 | The uncurated deck minus the 657 sentences with *vosotros* or Spain-only vocabulary | 13,191 | Releases (187 MB) |
@@ -32,12 +32,28 @@ original quality. The one-file versions are on
 
 ## The vocabulary deck
 
-The same repository builds **Ultimate top 5000 spanish vocab - best decks merged**: the pictures of *Essential Spanish Vocabulary
+The same repository builds **Ultimate top 5000 spanish vocab - best decks merged, customizable to your level**: the pictures of *Essential Spanish Vocabulary
 Top 5000* joined with the example sentences and audio of *New Spanish Top 5000 with Examples*, 5,601 words matched
 by headword and ordered by frequency, with `rank::` band, `cognate::` and `pos::` tags for cutting to your level
 (table in [docs/LEVELS.md](docs/LEVELS.md)). Its frequency ranks are also what the sentence scoring uses.
 One file, 105 MB, original audio: packages compress their media losslessly (see docs/METHOD.md), which is what
 brought it under AnkiWeb's limit.
+
+## Use the two decks together
+
+The sentence deck and the vocab deck are sorted on the same frequency list, so you can pace them against each other:
+
+| when you reach sentence… | you should know roughly the first… words of the vocab deck |
+|---|---|
+| 500 | 330 (vocab card ~650) |
+| 1,000 | 720 (card ~1,450) |
+| 2,500 | 1,400 (card ~2,750) |
+| 5,000 | 1,850 (card ~3,700) |
+| 7,500 | 2,350 (card ~4,700) |
+| 10,000 | 3,100 (card ~6,200) |
+| 13,615 (end) | 4,200 (card ~8,400) |
+
+(90th percentile of the hardest word in the sentences up to that point; the vocab deck has two cards per word.)
 
 ## Adjust it to your level
 
@@ -57,6 +73,13 @@ the table: [docs/LEVELS.md](docs/LEVELS.md).
 
 Latin American learners: the `region::vosotros` and `region::spain` tags mark the Spain-specific sentences, so
 `tag:region::*` → suspend removes them from any deck in one go.
+
+## Need more at your level? Ask an LLM
+
+The published decks are one selection from a bank of 78,016 scored sentences (`bank/sentence_bank.tsv.gz`). If
+you need more practice before moving up, or more of one thing (subjunctive, a word band, audio only, no subtitle
+lines), paste [docs/ASK_AN_LLM.md](docs/ASK_AN_LLM.md) and the bank to Claude or another LLM, describe what you
+are struggling with, and it can build an add-on you import into the same note type.
 
 ## How difficulty is measured (short version)
 

@@ -15,7 +15,7 @@ $(DATA)/vocab_words.tsv:
 	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --out ../$(DECKS)/Spanish_Top_5000_Merged.apkg --report ../$(DATA)/vocab_words.tsv --work ../work
 
 vocab-public: $(DATA)/vocab_words.tsv
-	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --mode public --out "../$(DECKS)/Ultimate top 5000 spanish vocab - best decks merged.apkg" --report ../$(DATA)/vocab_words_public.tsv --work ../work
+	cd $(PIPE) && $(PY) vocab_merge.py --old $(VOCAB_OLD) --new $(VOCAB_NEW) --mode public --out "../$(DECKS)/Ultimate top 5000 spanish vocab - best decks merged, customizable to your level.apkg" --report ../$(DATA)/vocab_words_public.tsv --work ../work
 	# if a package still exceeds AnkiWeb's limit: shrink_audio.py re-encodes the MP3s (lossy); repack.py only re-compresses the zip (lossless)
 
 rankmap: $(DATA)/rankmap.json
@@ -38,11 +38,14 @@ BUILD = cd $(PIPE) && $(PY) build_sentences.py --scored ../$(DATA)/scored.tsv --
 $(DATA)/easy_pick.txt: $(DATA)/scored.tsv $(DATA)/curation.tsv
 	cd $(PIPE) && $(PY) coverage_pick.py --scored ../$(DATA)/scored.tsv --levels ../$(DATA)/levels.json --rankmap ../$(DATA)/rankmap.json --curation ../$(DATA)/curation.tsv --max-level 10 --max-rank 1000 --k 3 --gram-per-level 40 --out ../$(DATA)/easy_pick.txt
 
-decks: $(DATA)/scored.tsv $(DATA)/curation.tsv $(DATA)/easy_pick.txt
+$(DATA)/gapfill_pick.txt: $(DATA)/easy_pick.txt
+	cd $(PIPE) && $(PY) gapfill_pick.py --scored ../$(DATA)/scored.tsv --levels ../$(DATA)/levels.json --curation ../$(DATA)/curation.tsv --easy-pick ../$(DATA)/easy_pick.txt --rankmap ../$(DATA)/rankmap.json --k-scheme 1000:5,3000:8,5000:12 --out ../$(DATA)/gapfill_pick.txt
+
+decks: $(DATA)/scored.tsv $(DATA)/curation.tsv $(DATA)/easy_pick.txt $(DATA)/gapfill_pick.txt
 	mkdir -p $(DECKS)
 	# AnkiWeb uploads (<150 MB each): main = curated pre-C1 vocabulary, challenge = C1+, every recording at original quality
-	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 exclude --keep-list ../$(DATA)/easy_pick.txt --name "Ultimate top 20000 spanish sentences - best decks merged" --out "../$(DECKS)/Ultimate top 20000 spanish sentences - best decks merged.apkg"   --report ../$(DATA)/report_levels_1-8.tsv
-	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 only --name "Ultimate top 20000 spanish sentences - best decks merged (extra 4,701 challenge sentences)" --out "../$(DECKS)/Ultimate top 20000 spanish sentences - best decks merged (extra 4,701 challenge sentences).apkg" --report ../$(DATA)/report_levels_9-10.tsv
+	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 exclude --keep-list ../$(DATA)/easy_pick.txt --only-list ../$(DATA)/gapfill_pick.txt --name "Ultimate top 20000 spanish sentences - best decks merged, customizable to your level" --out "../$(DECKS)/Ultimate top 20000 spanish sentences - best decks merged, customizable to your level.apkg"   --report ../$(DATA)/report_levels_1-8.tsv
+	$(BUILD) --variant quality --audio all --curation ../$(DATA)/curation.tsv --c1 only --name "Ultimate top 20000 spanish sentences - best decks merged, customizable to your level (extra 4,701 challenge sentences)" --out "../$(DECKS)/Ultimate top 20000 spanish sentences - best decks merged, customizable to your level (extra 4,701 challenge sentences).apkg" --report ../$(DATA)/report_levels_9-10.tsv
 	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)"     --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
 	# GitHub Releases only (no size limit): one-file versions with all audio
 	$(BUILD) --variant quality --audio all --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg --report ../$(DATA)/report_quality.tsv

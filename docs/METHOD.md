@@ -95,7 +95,13 @@ Three flags per sentence, each a judgement call made once and documented here:
   picks the sentences that cover the most unmet needs, with Tatoeba source, audio and the absence of names as
   tie-breakers. 2,509 survive. Sentences with any word beyond rank 1,000 are not subject to this.
 
-Not applied, deliberately: a cap on how many sentences share a target word above the easy section. The most common target words ("todo",
+- **subtitle gap-filling** (`pipeline/gapfill_pick.py`): the Tatoeba decks are proofread and carry audio, the
+  subtitle lines are three times as numerous. Every Tatoeba sentence is kept and each word's examples are counted
+  (quota 5 for top-1,000 words, 8 up to rank 3,000, 12 up to 5,000, plus 40 per grammar feature per level); a
+  subtitle line is admitted only while it still adds an example under quota, best-quality lines first. 5,805 of
+  13,895 subtitle lines survive; the main deck is 57% Tatoeba and 57% with audio.
+
+Not applied, deliberately: a cap on how many sentences share a target word beyond those quotas. The most common target words ("todo",
 "favor", "aquí") head hundreds of sentences each, but those are sentences made entirely of common words, which is
 exactly what the easy levels should contain.
 
@@ -150,7 +156,7 @@ and 105 MB for the vocabulary deck. `pipeline/repack.py` applies the same to any
 The sentence decks' native recordings are real speech and barely compress, and the synthetic clips are already
 lean 32 kbps files, so the 54,754-sentence deck with all its audio (192 MB) cannot be squeezed under AnkiWeb's limit
 without audible loss. The AnkiWeb release therefore splits the deck by vocabulary (`--c1 exclude` / `--c1 only`): the curated pre-C1
-deck (111 MB) and the C1+ deck (40 MB), each with every recording untouched. Native recordings are never
+deck (110 MB) and the C1+ deck (40 MB), each with every recording untouched. Native recordings are never
 re-encoded in any build (also a condition of their CC BY-NC-ND license). For other size targets the builder also has
 `--tts-max-level` (drop synthetic clips above a level) and `--tts-bitrate` (re-encode them, average-bitrate mono),
 and `pipeline/shrink_audio.py` is the blunt fallback that re-encodes every MP3 in a package.
