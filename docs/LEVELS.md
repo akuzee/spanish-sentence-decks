@@ -1,5 +1,8 @@
 # Adjusting a deck to your level
 
+On AnkiWeb the main deck comes in two parts, levels 1–8 and levels 9–10 ("Advanced"); they install as two sections
+of one deck, and everything below applies to both.
+
 Every note carries a `level::01` … `level::10` tag: the difficulty deciles of the whole sentence pool.
 Roughly, for a plain sentence of ordinary length:
 

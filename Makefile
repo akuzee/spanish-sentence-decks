@@ -34,12 +34,13 @@ $(DATA)/scored.tsv: $(DATA)/pool.tsv $(DATA)/rankmap.json
 BUILD = cd $(PIPE) && $(PY) build_sentences.py --scored ../$(DATA)/scored.tsv --levels ../$(DATA)/levels.json --rankmap ../$(DATA)/rankmap.json --sources-json ../sources.json --work ../work
 decks: $(DATA)/scored.tsv
 	mkdir -p $(DECKS)
-	# AnkiWeb uploads (<150 MB): native recordings untouched; synthetic recordings for levels 1-9 at ~20 kbps mono (Macro: native only)
-	$(BUILD) --variant quality --audio all --tts-max-level 9 --tts-bitrate 20k --name "Spanish Sentences – sorted by difficulty" --out ../$(DECKS)/Spanish_Sentences.apkg --report ../$(DATA)/report_quality.tsv
-	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)" --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
-	$(BUILD) --variant latam   --audio all --tts-max-level 9 --tts-bitrate 20k --name "Spanish Sentences – Latin American cut"  --out ../$(DECKS)/Spanish_Sentences_LatAm.apkg --report ../$(DATA)/report_latam.tsv
-	# full-audio builds (also include the 7500 deck's TTS recordings), for GitHub Releases
-	$(BUILD) --variant quality --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg
+	# AnkiWeb uploads (<150 MB each): the main deck is split in two so every recording stays at its original quality
+	$(BUILD) --variant quality --audio all --level-max 8 --name "Spanish Sentences::1 Levels 1–8"               --out ../$(DECKS)/Spanish_Sentences_Levels_1-8.apkg   --report ../$(DATA)/report_levels_1-8.tsv
+	$(BUILD) --variant quality --audio all --level-min 9 --name "Spanish Sentences::2 Advanced (levels 9–10)"  --out ../$(DECKS)/Spanish_Sentences_Advanced_9-10.apkg --report ../$(DATA)/report_levels_9-10.tsv
+	$(BUILD) --variant macro   --audio native --name "Spanish Sentences – Macro (everything, by difficulty)"     --out ../$(DECKS)/Spanish_Sentences_Macro.apkg --report ../$(DATA)/report_macro.tsv
+	# GitHub Releases only (no size limit): one-file versions with all audio
+	$(BUILD) --variant quality --audio all --name "Spanish Sentences – sorted by difficulty"   --out ../$(DECKS)/Spanish_Sentences_FullAudio.apkg --report ../$(DATA)/report_quality.tsv
+	$(BUILD) --variant latam   --audio all --name "Spanish Sentences – Latin American cut"     --out ../$(DECKS)/Spanish_Sentences_LatAm.apkg --report ../$(DATA)/report_latam.tsv
 	$(BUILD) --variant latam --sources tatoeba --name "Spanish Sentences – Tatoeba only (LatAm cut)" --out ../$(DECKS)/Spanish_Sentences_Tatoeba_LatAm.apkg
 	$(BUILD) --variant latam --sources tatoeba --audio native --name "Spanish Sentences – Tatoeba, Latin American cut, native audio" --out ../$(DECKS)/Spanish_Sentences_Tatoeba_LatAm_NativeAudio.apkg --report ../$(DATA)/report_tatoeba_latam.tsv
 	$(BUILD) --variant latam --level B1 --split-core 2 --name "Spanish Sentences – B1 LatAm (Core/Extended)" --out ../$(DECKS)/Spanish_Sentences_B1_LatAm.apkg --report ../$(DATA)/report_b1_latam.tsv

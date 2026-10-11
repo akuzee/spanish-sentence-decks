@@ -1,15 +1,16 @@
 # AnkiWeb description (main deck)
 
-Deck title: **Spanish Sentences – sorted by difficulty (54k sentences, native audio)**
+Deck title: **Spanish Sentences – sorted by difficulty, levels 1–8 (44k sentences, audio)**
 
 ---
 
 The best Spanish sentence decks on AnkiWeb, combined into one and sorted from easy to hard.
 
-54,754 sentences with English translations, pulled from five popular decks (the two Tatoeba decks, Neri's
-Spanish Sentences 1–3), de-duplicated, with fragments, broken lines and typos filtered out. Audio on 12,008 of
-them: 6,192 native recordings and 5,816 synthetic ones (the synthetic voice stops at level 9, the hardest 10% being
-text-only unless a native recording exists, to fit AnkiWeb's size limit; a full-audio version is on GitHub). Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
+43,803 sentences with English translations, pulled from five popular decks (the two Tatoeba decks, Neri's
+Spanish Sentences 1–3), de-duplicated, with fragments, broken lines and typos filtered out. Audio on 8,303 of them
+(native recordings where they exist, a synthetic voice otherwise). This is the easiest 80% of the pool, roughly A1
+through B2; the hardest 20% is a separate deck, "Spanish Sentences – Advanced (levels 9–10)", which installs as a
+second section of this one. Every sentence is scored for difficulty (how rare its hardest word is, plus grammar like
 subjunctive or conditional), so the deck starts with "Es lo que es" and ends with the subjunctive and rare
 vocabulary.
 
@@ -40,14 +41,23 @@ issue on GitHub.
 
 ---
 
+# Advanced deck
+
+Deck title: **Spanish Sentences – Advanced (levels 9–10)**
+
+The hardest 20% of "Spanish Sentences – sorted by difficulty": 10,951 sentences whose key word is rare or beyond
+the 5,000 most frequent words, or that stack subjunctive, conditional and perfect tenses. Roughly B2 and up.
+Audio on 5,253 of them. Same cards, tags and credits as the main deck; install both and they appear as two
+sections of one "Spanish Sentences" deck. Start here only if the main deck's level 8 feels easy.
+
+(SUPPORT and CREDITS blocks as in the main deck.)
+
 # Secondary decks (shorter)
 
 **Spanish Sentences – Macro (78k, everything)**: same as the main deck but nothing filtered out: every distinct
 line from the five source decks, including 2–3-word fragments, sorted by difficulty. Low-quality lines are tagged
 quality::low so you can cut them yourself. Link to GitHub for the rest, plus the SUPPORT and CREDITS blocks from the main deck.
 
-**Spanish Sentences – Latin American cut (54k)**: the main deck with the 657 Spain-specific sentences removed
-instead of tagged. Note the native audio is still a speaker from Spain.
 
 ---
 

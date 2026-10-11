@@ -69,6 +69,8 @@ def main():
     ap.add_argument("--sources", choices=["all", "tatoeba"], default="all")
     ap.add_argument("--level", choices=list(LEVEL_POLICY), default="none")
     ap.add_argument("--review-cap", type=int, default=1000, help="max sentences kept as reviews from the band under --level")
+    ap.add_argument("--level-min", type=int, default=1, help="keep only sentences at this level tag or above (1-10)")
+    ap.add_argument("--level-max", type=int, default=10, help="keep only sentences at this level tag or below (1-10)")
     ap.add_argument("--split-core", type=int, default=0, help="N best sentences per target word go to '1 Core'; 0 = flat deck")
     ap.add_argument("--no-gloss", action="store_true", help="omit the dictionary gloss of the target word")
     ap.add_argument("--vosotros-penalty", type=int, default=1000, help="how far vosotros sentences are pushed back in the order (score points; ~1000 = one level later, 3000 = to the end)")
@@ -89,6 +91,7 @@ def main():
     if a.sources == "tatoeba": rows = [r for r in rows if r["src"].startswith("tatoeba")]
     if a.variant in ("quality", "latam"): rows = [r for r in rows if r["quality"] == 1]
     if a.variant == "latam": rows = [r for r in rows if not r["vosotros"] and r["spain_w"] == 0]
+    rows = [r for r in rows if a.level_min <= r["level"] <= a.level_max]
     # ---- level policy
     drop_lv, rev_lv = LEVEL_POLICY[a.level]
     def quality(r):
@@ -170,7 +173,7 @@ def main():
         for r in rest + reviews: add(r, DID_P)
     total = len(core) + len(rest) + len(reviews)
     desc = (f"{total} Spanish sentences with English translations, sorted by difficulty (hardest word's frequency rank, grammar, length). "
-            f"Variant: <b>{a.variant}</b>, sources: <b>{a.sources}</b>, level preset: <b>{a.level}</b>. "
+            f"Variant: <b>{a.variant}</b>, sources: <b>{a.sources}</b>, level preset: <b>{a.level}</b>" + (f", levels {a.level_min}&ndash;{a.level_max} only" if (a.level_min, a.level_max) != (1, 10) else "") + ". "
             + (f"<b>1 Core</b> = best {a.split_core} sentences per target word ({len(core)}); <b>2 Extended</b> = the rest ({len(rest)}). " if a.split_core else "")
             + (f"{len(reviews)} sentences from the band just below the level start as long-interval reviews (tag tier::review). " if reviews else "")
             + "Latin American learners: Spain-specific sentences are tagged region::vosotros / region::spain; search tag:region::* and suspend them. "
